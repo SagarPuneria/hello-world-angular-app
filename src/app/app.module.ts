@@ -22,18 +22,18 @@ export class AppModule { }
 
 /*
 // Create new Angular project
-$ ng new hello-world
+$ ng new hello-world-angular-app
 ? Would you like to add Angular routing? (y/N) No
 ? Which stylesheet format would you like to use? CSS
 :
 :
 :
 .
-$ cd hello-world/
-hello-world $ ng serve
+$ cd hello-world-angular-app/
+hello-world-angular-app $ ng serve
 
 // Generating component using Angular CLI
-hello-world $ ng g c course
+hello-world-angular-app $ ng g c course
 CREATE src/app/course/course.component.css (0 bytes)
 CREATE src/app/course/course.component.html (21 bytes)
 CREATE src/app/course/course.component.spec.ts (628 bytes)
@@ -46,12 +46,12 @@ g -> generatec,
 c -> component,
 course -> name of component.
 
-hello-world $ ng serve
+hello-world-angular-app $ ng serve
 
 // Generating service using Angular CLI
-hello-world $ ng g s email
+hello-world-angular-app $ ng g s email
 CREATE src/app/email.service.spec.ts (328 bytes)
 CREATE src/app/email.service.ts (134 bytes)
 
-hello-world $ ng serve
+hello-world-angular-app $ ng serve
 */

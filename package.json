@@ -1,5 +1,5 @@
 {
-  "name": "hello-world",
+  "name": "hello-world-angular-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

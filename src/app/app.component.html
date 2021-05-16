@@ -5,8 +5,11 @@
 <div *ngIf="coursesList.length > 0; then courseList else noCourses"></div>
 <ng-template #courseList>Following are the list of courses and emails</ng-template>
 <ng-template #noCourses>No courses yet</ng-template>
+
 <courses></courses>
+
 <app-course></app-course>
+
 <!-- hidden used for small element trees. if condition is true then div block is hidden else not hidden -->
 <div [hidden]="coursesList.length == 0">
   List of hidden courses
@@ -43,3 +46,5 @@
     <button (click)="onChange(course)">Remove</button>
   </li>
 </ul>
+
+<authors></authors>

@@ -2,6 +2,7 @@ import { LogService } from './log.service';
 import { Injectable } from '@angular/core';
 /*
 No need to register this dependency(EmailService) in main app module, if we pass this argumnet {providedIn: 'root'} in Injectable() function.
+Below @Injectable({  providedIn: 'root' }) Decorator is dynamically created using Angular CLI command: $ ng g s email
 */
 @Injectable({
   providedIn: 'root'

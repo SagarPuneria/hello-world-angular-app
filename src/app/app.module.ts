@@ -7,11 +7,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
+import { AuthorsComponent } from './authors/authors.component';
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent, // This Component was manually created
-    CourseComponent
+    CourseComponent, AuthorsComponent
   ],
   imports: [
     BrowserModule
@@ -40,20 +41,32 @@ CREATE src/app/course/course.component.html (21 bytes)
 CREATE src/app/course/course.component.spec.ts (628 bytes)
 CREATE src/app/course/course.component.ts (269 bytes)
 UPDATE src/app/app.module.ts (486 bytes)
-
-Above command stands:
-ng -> Angular CLI,
-g -> generatec,
-c -> component,
-course -> name of component.
-
 hello-world-angular-app $ ng serve
 
 // Generating service using Angular CLI
 hello-world-angular-app $ ng g s email
 CREATE src/app/email.service.spec.ts (328 bytes)
 CREATE src/app/email.service.ts (134 bytes)
+hello-world-angular-app $ ng serve
 
+Above command stands:
+ng -> Angular CLI,
+g -> generatec,
+c -> component,
+course -> name of component,
+s -> service,
+email -> name of service.
+
+
+hello-world-angular-app $ ng g c authors
+CREATE src/app/authors/authors.component.css (0 bytes)
+CREATE src/app/authors/authors.component.html (22 bytes)
+CREATE src/app/authors/authors.component.spec.ts (635 bytes)
+CREATE src/app/authors/authors.component.ts (273 bytes)
+UPDATE src/app/app.module.ts (1963 bytes)
+hello-world-angular-app $ ng g s authors
+CREATE src/app/authors.service.spec.ts (338 bytes)
+CREATE src/app/authors.service.ts (136 bytes)
 hello-world-angular-app $ ng serve
 
 

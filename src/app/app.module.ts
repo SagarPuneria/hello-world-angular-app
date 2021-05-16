@@ -54,4 +54,9 @@ CREATE src/app/email.service.spec.ts (328 bytes)
 CREATE src/app/email.service.ts (134 bytes)
 
 hello-world-angular-app $ ng serve
+
+
+hello-world-angular-app $ git clone https://github.com/SagarPuneria/hello-world-angular-app.git
+hello-world-angular-app $ npm i
+hello-world-angular-app $ ng serve
 */

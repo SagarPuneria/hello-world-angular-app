@@ -36,8 +36,8 @@ export class CoursesComponent {
 
     // Correct approach ...
     constructor(service: CoursesService) {
-        console.log('Before service, this.courses:', this.courses)
+        console.log('Before getCourses, this.courses:', this.courses)
         this.courses = service.getCourses();
-        console.log('After service, this.courses:', this.courses)
+        console.log('After getCourses, this.courses:', this.courses)
     }
 }

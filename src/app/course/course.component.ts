@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CourseComponent implements OnInit {
   title = "List of emails";
   emails;
-  constructor(service: EmailService) {
+  constructor(public service: EmailService) {
     console.log('Before service, this.emails:', this.emails)
     this.emails = service.getEmails();
     console.log('After service, this.emails:', this.emails)

@@ -1,4 +1,5 @@
-// import { EmailService } from './email.service'; // No need to import
+import { LogService } from './log.service';
+// import { EmailService } from './email.service'; // No need to import or No need to register in providers
 import { CoursesService } from './courses.service';
 import { CoursesComponent } from './courses.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +16,7 @@ import { CourseComponent } from './course/course.component';
   imports: [
     BrowserModule
   ],
-  providers: [CoursesService],
+  providers: [CoursesService, LogService], // Registering service dependencies
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -70,7 +70,8 @@ CREATE src/app/authors.service.ts (136 bytes)
 hello-world-angular-app $ ng serve
 
 
-hello-world-angular-app $ git clone https://github.com/SagarPuneria/hello-world-angular-app.git
+$ git clone https://github.com/SagarPuneria/hello-world-angular-app.git
+$ cd hello-world-angular-app
 hello-world-angular-app $ npm i
 hello-world-angular-app $ ng serve
 */

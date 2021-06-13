@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
 // import { CoursesComponent } from './courses2.component';
 // import { CoursesComponent } from './courses3.component';
+// import { CoursesComponent } from './courses4.component';
 
 @NgModule({
   declarations: [

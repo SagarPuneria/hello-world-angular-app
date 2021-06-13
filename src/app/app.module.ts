@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
 // import { CoursesComponent } from './courses2.component';
+// import { CoursesComponent } from './courses3.component';
 
 @NgModule({
   declarations: [

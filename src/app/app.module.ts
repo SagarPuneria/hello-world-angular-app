@@ -8,6 +8,7 @@ import { CoursesComponent } from './courses.component';
 // import { CoursesComponent } from './courses4.component';
 // import { CoursesComponent } from './courses5.component';
 // import { CoursesComponent } from './courses6.component';
+// import { CoursesComponent } from './courses7.component';
 
 @NgModule({
   declarations: [

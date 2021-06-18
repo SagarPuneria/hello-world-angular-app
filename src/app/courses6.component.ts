@@ -5,6 +5,8 @@ import { Component } from "@angular/core";
     selector: 'courses',
     template: `
         <!-- <input (keyup)="onKeyUp($event)"/> -->
+
+        <!-- Event Filtering -->
         <input (keyup.enter)="onKeyUp()"/>
     `
 })

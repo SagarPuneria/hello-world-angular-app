@@ -1,3 +1,4 @@
+import { SummaryPipe } from './summary.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -12,11 +13,13 @@ import { CoursesComponent } from './courses.component';
 // import { CoursesComponent } from './courses7.component';
 // import { CoursesComponent } from './courses8.component'; // import { FormsModule }
 // import { CoursesComponent } from './courses9.component';
+// import { CoursesComponent } from './courses10.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent, // This Component was manually created
+    SummaryPipe
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { CoursesComponent } from './courses.component';
 // import { CoursesComponent } from './courses6.component';
 // import { CoursesComponent } from './courses7.component';
 // import { CoursesComponent } from './courses8.component'; // import { FormsModule }
+// import { CoursesComponent } from './courses9.component';
 
 @NgModule({
   declarations: [

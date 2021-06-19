@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -19,7 +19,7 @@ import { CoursesComponent } from './courses.component';
   ],
   imports: [
     BrowserModule,
-    // FormsModule // courses8.component.ts => ngModel directive is defiend in FormsModule
+    FormsModule // courses8.component.ts => ngModel directive is defiend in FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

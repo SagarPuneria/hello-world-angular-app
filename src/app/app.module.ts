@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { TitleCasePipe } from './title-case.pipe';
 // import { CoursesComponent } from './courses2.component';
 // import { CoursesComponent } from './courses3.component';
 // import { CoursesComponent } from './courses4.component';
@@ -22,6 +23,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
     CoursesComponent, // This Component was manually created
     SummaryPipe,
     FavoriteComponent,
+    TitleCasePipe,
   ],
   imports: [
     BrowserModule,

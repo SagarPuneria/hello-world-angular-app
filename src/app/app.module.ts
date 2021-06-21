@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 // import { CoursesComponent } from './courses2.component';
 // import { CoursesComponent } from './courses3.component';
 // import { CoursesComponent } from './courses4.component';
@@ -19,7 +20,8 @@ import { CoursesComponent } from './courses.component';
   declarations: [
     AppComponent,
     CoursesComponent, // This Component was manually created
-    SummaryPipe
+    SummaryPipe,
+    FavoriteComponent,
   ],
   imports: [
     BrowserModule,

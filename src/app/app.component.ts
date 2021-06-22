@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'hello-world-angular-app';
+  post = {
+    title: 'hello-world-angular-app',
+    isSelected: true
+  }
+
+  /* imageUrl = "http://lorempixel.com/400/200/";
+  onClick() {
+    console.log("button was clicked");
+  }
+  onFavoriteChange() {
+    console.log("onFavoriteChange.............");
+  } */
 }

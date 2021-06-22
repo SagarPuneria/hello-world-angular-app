@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   // inputs: ['isFavorite'] // there is problem with this approach(i.e., magic string)
 })
 export class FavoriteComponent implements OnInit {
-  @Input() isFavorite: boolean;
+  @Input('isFavorite') isSelected: boolean; // Aliasing Input Properties
 
   constructor() { }
 
@@ -15,7 +15,7 @@ export class FavoriteComponent implements OnInit {
   }
 
   onClick() {
-    this.isFavorite = !this.isFavorite;
+    this.isSelected = !this.isSelected;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'favorite',
@@ -9,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class FavoriteComponent implements OnInit {
   // @Input() isFavorite: boolean; // First approach: Input Properties concept(Not preffered approach)
   @Input('isFavorite') isSelected: boolean; // Second approach: Aliasing Input Properties(Preffered approach)
+  @Output() change = new EventEmitter();
 
   constructor() { }
 
@@ -18,6 +19,15 @@ export class FavoriteComponent implements OnInit {
   onClick() {
     // this.isFavorite = !this.isFavorite; // (First approach: Not preffered approach)
     this.isSelected = !this.isSelected; // (Second approach: Preffered approach)
+
+    // Passing Event Data
+    // this.change.emit(this.isSelected); // Simple component, just passing boolean value
+    this.change.emit({ newValue: this.isSelected }); // Complex component, just passing object
   }
 
+}
+
+
+export interface FavoriteComponentEventArgs {
+  newValue: boolean
 }

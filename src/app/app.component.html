@@ -11,4 +11,4 @@
 <!-- <favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange()"></favorite> -->
 
 <h1>Welcome to {{ post.title }}</h1>
-<favorite [isFavorite]="post.isSelected"></favorite>
+<favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange($event)"></favorite>

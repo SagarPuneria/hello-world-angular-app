@@ -1,3 +1,4 @@
+<h1>Welcome to {{ post.title }}</h1>
 <!-- // Property Binding -->
 <!-- <img [src]="imageUrl" /> -->
 <!-- <br /> -->
@@ -10,5 +11,5 @@
   // And in other words, we cannot use Property Binding and Evenet Binding. -->
 <!-- <favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange()"></favorite> -->
 
-<h1>Welcome to {{ post.title }}</h1>
 <favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange($event)"></favorite>
+<favorite-user></favorite-user>

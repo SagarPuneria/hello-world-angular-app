@@ -12,7 +12,7 @@ export class AppComponent {
     isSelected: true
   }
   // onFavoriteChange(isFavorite: any) { // isFavorite: any => Intellisense won't work in this method, if isFavorite is object.
-  // onFavoriteChange(eventArgs: FavoriteComponentEventArgs) { //OR onFavoriteChange(eventArgs: { newValue: boolean }) {
+  // onFavoriteChange(eventArgs: { newValue: boolean }) {
   onFavoriteChange(eventArgs: FavoriteComponentEventArgs) { // To make FavoriteComponentEventArgs reusable across the app, import from FavoriteComponent.
     console.log("Favorite changed:", eventArgs);
   }

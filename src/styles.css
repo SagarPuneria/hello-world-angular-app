@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css"; /* Used for padding the body */
+@import "~font-awesome/css/font-awesome.css"; /* Used for class="fa"; class="fa fa-user" in its respective templates */
+
+body { padding: 20px; }

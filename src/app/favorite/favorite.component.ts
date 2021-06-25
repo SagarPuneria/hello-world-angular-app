@@ -1,9 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'favorite',
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css'],
+
+  encapsulation: ViewEncapsulation.Emulated, // This is the default option.
+  /* 
+    ViewEncapsulation.None => It means the styles defined in "favorite.component.css" will leak outside this template/component.
+    In other words, when we go back to the browser, both our icons(fa-star and fa-user) are going to be red.
+  */
+  // encapsulation: ViewEncapsulation.None,
+
   // inputs: ['isFavorite'] // Third approach: there is problem with this approach(i.e., magic string)
 })
 export class FavoriteComponent implements OnInit {

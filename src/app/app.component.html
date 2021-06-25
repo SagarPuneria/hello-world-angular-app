@@ -13,3 +13,12 @@
 
 <favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange($event)"></favorite>
 <favorite-user></favorite-user>
+
+<!-- ng-container not render this ng-container element in the DOM. -->
+<bootstrap-panel>
+  <ng-container class="heading">Heading</ng-container>
+  <div class="body">
+    <h2>Body</h2>
+    <p>Some content here ...</p>
+  </div>
+</bootstrap-panel>

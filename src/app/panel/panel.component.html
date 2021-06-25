@@ -1,0 +1,16 @@
+<p>panel works!</p>
+<!-- div.panel.panel-default>div.panel-heading+div.panel-body(press tab button) -->
+<!-- <div class="panel panel-default">
+    <div class="panel-heading">Heading</div>
+    <div class="panel-body">Body</div>
+</div> -->
+
+<!-- ng-content is injection point to provide content. -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ng-content select=".heading"></ng-content>
+    </div>
+    <div class="panel-body">
+        <ng-content select=".body"></ng-content>
+    </div>
+</div>

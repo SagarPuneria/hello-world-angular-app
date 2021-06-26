@@ -16,6 +16,11 @@ export class AppComponent {
   onFavoriteChange(eventArgs: FavoriteComponentEventArgs) { // To make FavoriteComponentEventArgs reusable across the app, import from FavoriteComponent.
     console.log("Favorite changed:", eventArgs);
   }
+  tweet = {
+    body: "Here is the body of tweet ....",
+    isLiked: true,
+    likesCount: 10
+  }
   /* imageUrl = "http://lorempixel.com/400/200/";
   onClick() {
     console.log("button was clicked");

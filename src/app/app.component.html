@@ -25,3 +25,24 @@
 <div [hidden]="courses.length > 0">
   No courses yet
 </div>
+
+
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="viewMode == 'map'" (click)="viewMode = 'map'">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      Map View
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="viewMode == 'list'" (click)="viewMode = 'list'">
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" /> -->
+      List View
+    </a>
+  </li>
+</ul>
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'map'">Map View Content</div>
+  <div *ngSwitchCase="'list'">List View Content</div>
+  <div *ngSwitchDefault>Otherwise</div>
+</div>

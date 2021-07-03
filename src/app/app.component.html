@@ -8,8 +8,20 @@
   No course yet
 </div>
 
+<!-- Without using the Leading Asterisk[ngIf]. Below ng-template is same in DOM if we use above *ngIf directive  -->
+<ng-template [ngIf]="courses.length > 0">
+  <div>
+    List of courses
+  </div>
+</ng-template>
+<ng-template [ngIf]="!(courses.length > 0)">
+  <div>
+    No courses
+  </div>
+</ng-template>
 
-<!-- Consistent/New approach. ngIf is used for large element trees. ng-template element is not added in DOM -->
+
+<!-- Consistent/New approach. ngIf is used for large element trees. Using ng-template, bydefault div element is not added in DOM -->
 <div *ngIf="course.length > 0; then coursesList else noCourses"></div>
 <ng-template #coursesList>
   List of course: {{course}}

@@ -1,29 +1,29 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <!-- Inconsistent/Old approach. div element is added in DOM only when ngIf is true. -->
-<div *ngIf="courses.length > 0">
-  List of courses: {{courses}}
+<div *ngIf="course.length > 0">
+  List of course: {{course}}
 </div>
-<div *ngIf="courses.length == 0">
-  No courses yet
+<div *ngIf="course.length == 0">
+  No course yet
 </div>
 
 
 <!-- Consistent/New approach. ngIf is used for large element trees. ng-template element is not added in DOM -->
-<div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
+<div *ngIf="course.length > 0; then coursesList else noCourses"></div>
 <ng-template #coursesList>
-  List of courses: {{courses}}
+  List of course: {{course}}
 </ng-template>
 <ng-template #noCourses>
-  No courses yet
+  No course yet
 </ng-template>
 
 <!-- hidden used for small element trees / more costly and takes more memory(i.e., Both div elements are added on DOM, because of Hidden Property) -->
-<div [hidden]="courses.length == 0">
-  List of courses:{{courses}}
+<div [hidden]="course.length == 0">
+  List of course:{{course}}
 </div>
-<div [hidden]="courses.length > 0">
-  No courses yet
+<div [hidden]="course.length > 0">
+  No course yet
 </div>
 
 
@@ -46,3 +46,10 @@
   <div *ngSwitchCase="'list'">List View Content</div>
   <div *ngSwitchDefault>Otherwise</div>
 </div>
+
+
+<ul>
+  <li *ngFor="let course of courses; index as i; even as isEven;">
+    index:{{i}}, id:{{course.id}}, name:{{course.name}} <span *ngIf="isEven">(EVEN)</span>
+  </li>
+</ul>

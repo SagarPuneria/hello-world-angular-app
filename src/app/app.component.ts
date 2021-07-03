@@ -34,4 +34,5 @@ export class AppComponent {
     console.log(i, c)
     return c ? c.id : undefined;
   }
+  canSave = true;
 }

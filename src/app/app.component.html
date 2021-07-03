@@ -42,12 +42,14 @@
 <ul class="nav nav-pills">
   <li class="nav-item">
     <a class="nav-link" [class.active]="viewMode == 'map'" (click)="viewMode = 'map'">
+      <!-- [style.backgroundColor]="'#007bff'" [style.color]="'#fff'" [style.border-radius]="'.25rem'"> -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
       Map View
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" [class.active]="viewMode == 'list'" (click)="viewMode = 'list'">
+      <!-- [style.backgroundColor]="'#007bff'" [style.color]="'#fff'" [style.border-radius]="'.25rem'"> -->
       <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" /> -->
       List View
     </a>
@@ -82,3 +84,17 @@
     index:{{i}}, id:{{course.id}}, name:{{course.name}}
   </li>
 </ul>
+
+
+<!-- <button [style.backgroundColor]="canSave ? 'blue':'gray'" [style.color]="canSave ? 'white':'black'"
+  [style.fontWeight]="canSave ? 'bold':'normal'">
+  Save
+</button> -->
+<!-- OR using ngStyle: add above multiple styles together -->
+<button [ngStyle]="{
+    'backgroundColor':canSave ? 'blue':'gray',
+    'color':canSave ? 'white':'black',
+    'fontWeight':canSave ? 'bold':'normal'
+  }">
+  Save
+</button>

@@ -62,3 +62,11 @@
     <button (click)="onChange(course)">Change</button>
   </li>
 </ul>
+
+
+<button (click)="loadCourses()">Load Courses</button>
+<ul>
+  <li *ngFor="let course of courses; index as i; trackBy : trackCourse">
+    index:{{i}}, id:{{course.id}}, name:{{course.name}}
+  </li>
+</ul>

@@ -23,4 +23,15 @@ export class AppComponent {
   onChange(course1) {
     course1.name = 'UPDATED';
   }
+  loadCourses() {
+    this.courses = [
+      { id: 5, name: 'course5' },
+      { id: 6, name: 'course6' },
+      { id: 7, name: 'course7' }
+    ];
+  }
+  trackCourse(i, c) {
+    console.log(i, c)
+    return c ? c.id : undefined;
+  }
 }

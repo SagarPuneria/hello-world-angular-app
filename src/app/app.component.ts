@@ -31,8 +31,15 @@ export class AppComponent {
     ];
   }
   trackCourse(i, c) {
-    console.log(i, c)
+    console.log(i, c);
     return c ? c.id : undefined;
   }
   canSave = true;
+  task = {
+    title: 'Review applications',
+    // assignee: null
+    assignee: {
+      name: 'Sagar Puneria'
+    }
+  }
 }

@@ -98,3 +98,11 @@
   }">
   Save
 </button>
+
+
+<br />
+<!-- <span *ngIf="task.assignee">{{task.assignee.name}}</span> -->
+<!-- OR Safe Traversal Operator -->
+<span>{{task.assignee?.name}}</span>
+
+<span>{{task?.assignee?.name}}</span>

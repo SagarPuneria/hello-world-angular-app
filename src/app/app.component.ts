@@ -13,4 +13,14 @@ export class AppComponent {
     { id: 3, name: 'course3' }
   ];
   viewMode = 'map';
+  onAdd() {
+    this.courses.push({ id: 4, name: 'course' });
+  }
+  onRemove(course1) {
+    let index = this.courses.indexOf(course1);
+    this.courses.splice(index, 1);
+  }
+  onChange(course1) {
+    course1.name = 'UPDATED';
+  }
 }

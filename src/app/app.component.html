@@ -53,3 +53,12 @@
     index:{{i}}, id:{{course.id}}, name:{{course.name}} <span *ngIf="isEven">(EVEN)</span>
   </li>
 </ul>
+
+<button (click)="onAdd()">Add</button>
+<ul>
+  <li *ngFor="let course of courses">
+    {{course.name}}
+    <button (click)="onRemove(course)">Remove</button>
+    <button (click)="onChange(course)">Change</button>
+  </li>
+</ul>

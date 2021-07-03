@@ -6,3 +6,12 @@
 <!-- "isSelected" preffered approach(Second approach) -->
 <span class="fa" [class.fa-star]="isSelected" [class.fa-star-o]="!isSelected" style="font-size: 5em;"
     (click)="onClick()"></span>
+
+<br />
+<br />
+<!-- Using ngClass attribute directive, we don't have to repeat class binding twice. -->
+<!-- Using ngClass attribute directive, we can modify attibutes of existing DOM element. -->
+<span class="fa" [ngClass]="{
+        'fa-star': isSelected,
+        'fa-star-o': !isSelected
+    }" style="font-size: 5em;" (click)="onClick()"></span>

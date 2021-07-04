@@ -101,8 +101,19 @@
 
 
 <br />
+<!-- Safe Traversal Operator -->
 <!-- <span *ngIf="task.assignee">{{task.assignee.name}}</span> -->
 <!-- OR Safe Traversal Operator -->
 <span>{{task.assignee?.name}}</span>
 
 <span>{{task?.assignee?.name}}</span>
+
+
+<br />
+<!-- Creating Custom Directives -->
+<!-- <input type="text" appInputFormat [format]="'uppercase'"> -->
+<!-- OR -->
+<!--  if you have only one input properties(i.e.,format), 
+ you can use selector(i.e.,appInputFormat) of that directive as an alias of that input property 
+ and this simplifies the usages of your custom directive. -->
+<input type="text" [appInputFormat]="'uppercase'">

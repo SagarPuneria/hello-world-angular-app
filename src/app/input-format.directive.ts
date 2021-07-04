@@ -29,3 +29,9 @@ export class InputFormatDirective {
   }
 
 }
+/*
+$ ng g d input-format
+CREATE src/app/input-format.directive.spec.ts (245 bytes)
+CREATE src/app/input-format.directive.ts (151 bytes)
+UPDATE src/app/app.module.ts (484 bytes)
+*/

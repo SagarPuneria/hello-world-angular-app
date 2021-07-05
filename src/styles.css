@@ -1,1 +1,2 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css"; /* Used for class="form-group"; class="form-control" in its respective templates */

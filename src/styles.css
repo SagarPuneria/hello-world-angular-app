@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css"; /* Used for class="form-group"; class="form-control" in its respective templates */
+@import "~bootstrap/dist/css/bootstrap.css"; /* Used for padding; class="form-group"; class="form-control" in its respective templates */
 
+body { padding: 20px; }
 /*
 // import bootstrap Style Sheets into src/styles.css file
 // like => @import "~bootstrap/dist/css/bootstrap.css";

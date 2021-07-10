@@ -2,6 +2,10 @@
 @import "~bootstrap/dist/css/bootstrap.css"; /* Used for padding; class="form-group"; class="form-control" in its respective templates */
 
 body { padding: 20px; }
+
+.form-control.ng-touched.ng-invalid {
+     border:2px solid red;
+}
 /*
 // import bootstrap Style Sheets into src/styles.css file
 // like => @import "~bootstrap/dist/css/bootstrap.css";

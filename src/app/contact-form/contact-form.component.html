@@ -7,9 +7,14 @@
         <label for="firstName">
             <strong>First Name</strong>
         </label>
-        <input required ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName"
-            type="text" class="form-control" placeholder="Enter first name">
-        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required.</div>
+        <input required minlength="3" maxlength="10" pattern="banana" ngModel name="firstName" #firstName="ngModel"
+            (change)="log(firstName)" id="firstName" type="text" class="form-control" placeholder="Enter first name">
+        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+            <div *ngIf="firstName.errors.required">First Name is required.</div>
+            <div *ngIf="firstName.errors.minlength">First name should be minimum
+                {{firstName.errors.minlength.requiredLength}} characters.</div>
+            <div *ngIf="firstName.errors.pattern">First name doesn't match the pattern.</div>
+        </div>
     </div>
 
     <!-- div.form-group>label[for='comment']+textarea[id='comment'].form-control -->

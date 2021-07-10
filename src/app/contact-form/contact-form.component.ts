@@ -13,7 +13,12 @@ export class ContactFormComponent implements OnInit {
   }
 
   log(x) {
-    console.log(">>>log, x:", x)
+    console.log(">>>log, x:", x);
+  }
+
+  submit(f) {
+    console.log(">>>submit, f:", f);
+    console.log(">>>submit, form value:", f.value, f.form.value);
   }
 
 }

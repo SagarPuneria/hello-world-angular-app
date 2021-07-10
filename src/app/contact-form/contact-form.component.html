@@ -1,5 +1,5 @@
 <!-- form>div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
-<form>
+<form #f="ngForm" (ngSubmit)="submit(f)">
 
     <!-- div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
     <div class="form-group">

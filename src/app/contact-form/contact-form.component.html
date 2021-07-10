@@ -1,36 +1,39 @@
 <!-- form>div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
 <form #f="ngForm" (ngSubmit)="submit(f)">
 
-    <!-- div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
-    <div class="form-group">
-        <!-- label[for='firstName']+input[id='firstName' type='text'].form-control -->
-        <label for="firstName">
-            <strong>First Name</strong>
-        </label>
-        <input 
-            required 
-            minlength="3" 
-            maxlength="10" 
-            pattern="banana" 
-            ngModel 
-            name="firstName" 
-            #firstName="ngModel" 
-            (change)="log(firstName)" 
-            id="firstName" 
-            type="text" 
-            placeholder="Enter first name" 
-            class="form-control">
-        <div 
-            class="alert alert-danger" 
-            *ngIf="firstName.touched && !firstName.valid">
-            <div *ngIf="firstName.errors.required">
-                First Name is required.
-            </div>
-            <div *ngIf="firstName.errors.minlength">
-                First name should be minimum {{firstName.errors.minlength.requiredLength}} characters.
-            </div>
-            <div *ngIf="firstName.errors.pattern">
-                First name doesn't match the pattern.
+    <div ngModelGroup="contact" #contact="ngModelGroup" (change)="getContact(contact)">
+        <div *ngIf="!contact.valid">Fill below details</div>
+        <!-- div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
+        <div class="form-group">
+            <!-- label[for='firstName']+input[id='firstName' type='text'].form-control -->
+            <label for="firstName">
+                <strong>First Name</strong>
+            </label>
+            <input 
+                required 
+                minlength="3" 
+                maxlength="10" 
+                pattern="banana" 
+                ngModel 
+                name="firstName" 
+                #firstName="ngModel" 
+                (change)="log(firstName);getContact(contact)" 
+                id="firstName" 
+                type="text" 
+                placeholder="Enter first name" 
+                class="form-control">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="firstName.touched && !firstName.valid">
+                <div *ngIf="firstName.errors.required">
+                    First Name is required.
+                </div>
+                <div *ngIf="firstName.errors.minlength">
+                    First name should be minimum {{firstName.errors.minlength.requiredLength}} characters.
+                </div>
+                <div *ngIf="firstName.errors.pattern">
+                    First name doesn't match the pattern.
+                </div>
             </div>
         </div>
     </div>

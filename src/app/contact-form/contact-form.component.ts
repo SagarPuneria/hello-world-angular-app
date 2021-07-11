@@ -25,4 +25,9 @@ export class ContactFormComponent implements OnInit {
     console.log(">>>getContact, ngModelGroup c:", c);
   }
 
+  contactMethods = [
+    { id: 1, name: 'Email' },
+    { id: 2, name: 'Phone' },
+  ];
+
 }

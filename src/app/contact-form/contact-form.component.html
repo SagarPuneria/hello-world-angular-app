@@ -47,6 +47,17 @@
             placeholder="Enter comment"></textarea>
     </div>
 
+    <div class="checkbox">
+        <label>
+            <!-- Similar to other input fields, we need to apply the ngModel directive here.
+            And as you know Angular will create an instance of the form control object for this input field.
+            And you should also set the name attribute isSubscribed -->
+            <input type="checkbox" ngModel name="isSubscribed">Subscribe to mailing list
+        </label>
+    </div>
+    <p>
+        {{f.value | json}}
+    </p>
     <!-- button.btn.btn-primary -->
     <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>

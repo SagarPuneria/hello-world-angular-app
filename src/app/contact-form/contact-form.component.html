@@ -2,7 +2,7 @@
 <form #f="ngForm" (ngSubmit)="submit(f)">
 
     <div ngModelGroup="contact" #contact="ngModelGroup" (change)="getContact(contact)">
-        <div *ngIf="!contact.valid">Fill the below details</div>
+        <!-- <div *ngIf="!contact.valid">Enter the valid name</div> -->
         <!-- div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
         <div class="form-group">
             <!-- label[for='firstName']+input[id='firstName' type='text'].form-control -->
@@ -48,5 +48,5 @@
     </div>
 
     <!-- button.btn.btn-primary -->
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>

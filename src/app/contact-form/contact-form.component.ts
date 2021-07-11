@@ -13,16 +13,16 @@ export class ContactFormComponent implements OnInit {
   }
 
   log(x) {
-    console.log(">>>log, x:", x);
+    console.log(">>>log, ngModel x:", x);
   }
 
   submit(f) {
-    console.log(">>>Debug 1 submit, f:", f);
-    console.log(">>>Debug 2 submit, form value:", f.value, f.form.value);
+    console.log(">>>Debug 1 submit, ngForm f:", f);
+    console.log(">>>Debug 2 submit, ngForm value:", f.value, f.form.value);
   }
 
   getContact(c) {
-    console.log(">>>getContact, c:", c);
+    console.log(">>>getContact, ngModelGroup c:", c);
   }
 
 }

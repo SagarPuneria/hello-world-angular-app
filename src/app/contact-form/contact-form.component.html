@@ -2,7 +2,7 @@
 <form #f="ngForm" (ngSubmit)="submit(f)">
 
     <div ngModelGroup="contact" #contact="ngModelGroup" (change)="getContact(contact)">
-        <div *ngIf="!contact.valid">Fill below details</div>
+        <div *ngIf="!contact.valid">Fill the below details</div>
         <!-- div.form-group>label[for='firstName']+input[id='firstName' type='text'].form-control -->
         <div class="form-group">
             <!-- label[for='firstName']+input[id='firstName' type='text'].form-control -->

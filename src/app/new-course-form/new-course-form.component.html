@@ -1,0 +1,39 @@
+<br>
+<form #f="ngForm" (ngSubmit)="submit(f.value)">
+    <!-- div.from-group>label[for='name']+input[type='text'][id='name'].form-control -->
+    <div class="from-group">
+        <label for="name">Course Name</label>
+        <!-- <input type="text" id="name" class="form-control"> -->
+        <input reqiured minlength="3" ngModel name="cname" #cname="ngModel" type="text" id="cname" class="form-control">
+        <!-- div.alert.alert-danger -->
+        <div *ngIf="cname.touched && cname.invalid" class="alert alert-danger">
+            <div *ngIf="cname.errors.reqiured">Name field is required.</div>
+            <div *ngIf=" cname.errors.minlength">Name field should be atleast {{cname.errors.minlength.requiredLength}}
+                characters.</div>
+        </div>
+    </div>
+    <!-- div.form-group>label[for='category']+select[id='category'].from-control -->
+    <div class="form-group">
+        <label for="category">Category</label>
+        <!-- <br> -->
+        <!-- <select name="" id="category" class="from-control"> -->
+        <select required ngModel name="category" #category="ngModel" id="category" class="from-control">
+            <option value=""></option>
+            <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+        </select>
+        <!-- div.alert.alert-danger -->
+        <div *ngIf="category.touched && category.invalid" class="alert alert-danger">
+            Category field is required.
+        </div>
+    </div>
+    <!-- div.checkbox>label[for='moneyBackGuaratee']>input[type='checkbox'][id='moneyBackGuaratee'].form-control -->
+    <div class="checkbox">
+        <label for="moneyBackGuaratee">
+            <input ngModel name="hasMoneyBackGurantee" type="checkbox" id="moneyBackGuaratee">
+            30-day money-back guarantee?
+        </label>
+    </div>
+    <p>{{ f.value | json }}</p>
+    <!-- button.btn.btn-primary -->
+    <button class="btn btn-primary" [disabled]="f.invalid">Create</button>
+</form>

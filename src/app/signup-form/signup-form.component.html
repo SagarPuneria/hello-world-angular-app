@@ -6,6 +6,9 @@
             id="username" 
             type="text" 
             class="form-control">
+        <!-- div.alert.alert-danger -->
+        <!-- <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">Username is required</div> -->
+        <div *ngIf="userName.touched && userName.invalid" class="alert alert-danger">Username is required</div>
     </div>
     <div class="form-group">
         <label for="password"><strong>Password</strong></label>

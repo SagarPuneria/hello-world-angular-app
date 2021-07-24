@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'signup-form',
@@ -13,9 +13,12 @@ export class SignupFormComponent implements OnInit {
     // So then we need to put this key in single quotes.
     // 'user-name':new FormControl()
 
-    username: new FormControl(),
-    password: new FormControl()
-  })
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
+  get userName() {
+    return this.form.get('username');
+  };
 
   constructor() { }
 

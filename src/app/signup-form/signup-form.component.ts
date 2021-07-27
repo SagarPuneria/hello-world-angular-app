@@ -27,7 +27,22 @@ export class SignupFormComponent implements OnInit {
   get userName() {
     return this.form.get('username');
   };
+  login() {
+    // Setting error when user click submit the form, we are goinng to get this error no matter what.
+    this.form.setErrors({
+      invalidLogin: true
+    });
+    // this.userName.setErrors
 
+    /* // Comenting the below code, since we don't authentication service...
+    let isValid = authService.login(this.form.value)
+    if (!isValid){
+      // this.userName.setErrors
+      this.form.setErrors({
+        invalidLogin: true
+      })
+    } */
+  }
   constructor() { }
 
   ngOnInit() {

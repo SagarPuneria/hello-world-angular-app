@@ -6,6 +6,7 @@
             id="username" 
             type="text" 
             class="form-control">
+        <div *ngIf="userName.pending">Checking for uniqueness...</div>
         <!-- div.alert.alert-danger -->
         <!-- <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">Username is required</div> -->
         <!-- <div *ngIf="userName.touched && userName.invalid" class="alert alert-danger">Username is required</div> -->

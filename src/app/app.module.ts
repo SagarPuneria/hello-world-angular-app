@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NestedFormGroupsComponent } from './nested-form-groups/nested-form-groups.component';
+import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupFormComponent,
-    NestedFormGroupsComponent
+    NestedFormGroupsComponent,
+    NewCourseFormComponent
   ],
   imports: [
     BrowserModule,

@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NestedFormGroupsComponent } from './nested-form-groups/nested-form-groups.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    NestedFormGroupsComponent
   ],
   imports: [
     BrowserModule,

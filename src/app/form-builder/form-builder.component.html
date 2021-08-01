@@ -32,6 +32,7 @@
         </div>
     </div>
 
+    <label for="topics"><strong>Array form</strong></label>
     <!-- input.form-control -->
     <input type="text" class="form-control"
     (keyup.enter)="addTopic(topic)" #topic>
@@ -46,3 +47,17 @@
     </ul>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
+
+
+<!-- <form [formGroup]="form">
+    <input formControlName="name"/>
+    <div formGroupName= "contact">
+        <input formControlName="email"/>
+        <input formControlName="phone"/>
+    </div>
+    <ul>
+        <li *ngFor="let topic of topics.controls">
+            {{topic.value}}
+        </li>
+    </ul>
+</form> -->

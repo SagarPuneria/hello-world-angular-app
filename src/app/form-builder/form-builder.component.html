@@ -1,0 +1,48 @@
+<p>form-builder works!</p>
+
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="name"><strong>Username</strong></label>
+        <input 
+            formControlName="name"
+            id="name" 
+            type="text" 
+            class="form-control">
+        <div *ngIf="userName.touched && userName.invalid" class="alert alert-danger">
+            <div *ngIf="userName.errors.required">Username is required</div>
+        </div>
+    </div>
+
+    <div formGroupName="contact">
+        <div class="form-group">
+            <label for="email"><strong>Email</strong></label>
+            <input 
+                formControlName="email"
+                id="email" 
+                type="text" 
+                class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="phone"><strong>Phone</strong></label>
+            <input 
+                formControlName="phone"
+                id="phone" 
+                type="text" 
+                class="form-control">
+        </div>
+    </div>
+
+    <!-- input.form-control -->
+    <input type="text" class="form-control"
+    (keyup.enter)="addTopic(topic)" #topic>
+    <!-- ul.list-group>li.list-group-item -->
+    <ul class="list-group">
+        <li
+            *ngFor="let topic of topics.controls"
+            (click)="removeTopic(topic)"
+            class="list-group-item">
+            {{topic.value}}
+        </li>
+    </ul>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>

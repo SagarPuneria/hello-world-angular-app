@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NestedFormGroupsComponent } from './nested-form-groups/nested-form-groups.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 import { FormBuilderComponent } from './form-builder/form-builder.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormBuilderComponent } from './form-builder/form-builder.component';
     SignupFormComponent,
     NestedFormGroupsComponent,
     NewCourseFormComponent,
-    FormBuilderComponent
+    FormBuilderComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -12,9 +12,9 @@ export class PostsComponent {
    so you don't need to do response.json().data anymore. Just use response directly. */
   constructor(http: HttpClient) {
     http.get('http://jsonplaceholder.typicode.com/posts').subscribe(response => {
-      console.log(typeof this.posts);
+      console.log(typeof this.posts); // undefined
       this.posts = response
-      console.log(typeof this.posts);
+      console.log(typeof this.posts); // object
       console.log(this.posts);
     });
     /* subscribe(

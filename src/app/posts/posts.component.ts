@@ -33,12 +33,18 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     // Called after the constructor and called  after the first ngOnChanges()
     this.service.getPosts()
-      .subscribe(response => {
-        console.log(typeof this.posts); // undefined
-        this.posts = response;
-        console.log(typeof this.posts); // object
-        console.log(this.posts);
-      });
+      .subscribe(
+        response => {
+          console.log(typeof this.posts); // undefined
+          this.posts = response;
+          console.log(typeof this.posts); // object
+          console.log(this.posts);
+        },
+        (error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+          alert('An unexpected error occured.');
+          console.log(error);
+        }
+      );
   }
 
   createPost(input: HTMLInputElement) {
@@ -47,28 +53,55 @@ export class PostsComponent implements OnInit {
     let post = { title: input.value };
     input.value = '';
     this.service.createPost(post)
-      .subscribe(response => {
-        post['id'] = response['id'];
-        this.posts.splice(0, 0, post);
-        // console.log(response['id']);
-        console.log(this.posts);
-      });
+      .subscribe(
+        response => {
+          post['id'] = response['id'];
+          this.posts.splice(0, 0, post);
+          // console.log(response['id']);
+          console.log(this.posts);
+        },
+        (error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+          if (error.status === 400) {
+            // this.form.setErrors(error.json())
+          }
+          else {
+            alert('An unexpected error occured.');
+            console.log(error);
+          }
+        }
+      );
   }
 
   updatePost(post) {
     this.service.updatePost(post)
-      .subscribe(response => {
-        console.log(response);
-      });
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        (error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+          alert('An unexpected error occured.');
+          console.log(error);
+        }
+      );
     // OR
     // this.http.put(this.url, JSON.stringify(post));
   }
 
   deletePost(post) {
     this.service.deletePost(post['id'])
-      .subscribe(response => {
-        let index = this.posts.indexOf(post);
-        this.posts.splice(index, 1);
-      });
+      .subscribe(
+        response => {
+          let index = this.posts.indexOf(post);
+          this.posts.splice(index, 1);
+        },
+        (error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+          if (error.status === 404)
+            alert('This post has already been deleted.');
+          else {
+            alert('An unexpected error occured.');
+            console.log(error);
+          }
+        }
+      );
   }
 }

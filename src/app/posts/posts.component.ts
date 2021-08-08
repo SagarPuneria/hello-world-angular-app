@@ -16,6 +16,7 @@ export class PostsComponent implements OnInit {
   constructor(private http: HttpClient) {
     /*
     // We shouldn't perform expensive operations like calling the server.
+    // Do not call HTTP services in the constructor of your components. If you need initialization, use ngOnInit() method.
     http.get(this.url).subscribe(response => {
       console.log(typeof this.posts); // undefined
       this.posts = response;

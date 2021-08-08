@@ -26,3 +26,12 @@ export class PostService {
     return this.http.delete(this.url + '/' + id);
   }
 }
+
+/*
+$ ng g s post
+CREATE src/app/post.service.spec.ts (323 bytes)
+CREATE src/app/post.service.ts (133 bytes)
+$ cd src/app/
+$ mkdir services
+$ mv post.service.* services/
+*/

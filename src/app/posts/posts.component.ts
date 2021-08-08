@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'posts',
@@ -8,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
   posts;
-  private url = 'http://jsonplaceholder.typicode.com/posts';
 
 
   // In Angular2+ we use constructor to do the DI(Dependency Injection).
   // Called first time before the ngOnInit().
-  constructor(private http: HttpClient) {
+  // constructor(private http: HttpClient) { // So in our component we should not HTTP class. Instead we should work with our services.
+  constructor(private service: PostService) {
     /*
     // We shouldn't perform expensive operations like calling the server.
     // Do not call HTTP services in the constructor of your components. If you need initialization, use ngOnInit() method.
@@ -31,12 +32,13 @@ export class PostsComponent implements OnInit {
   }
   ngOnInit() {
     // Called after the constructor and called  after the first ngOnChanges()
-    this.http.get(this.url).subscribe(response => {
-      console.log(typeof this.posts); // undefined
-      this.posts = response;
-      console.log(typeof this.posts); // object
-      console.log(this.posts);
-    });
+    this.service.getPosts()
+      .subscribe(response => {
+        console.log(typeof this.posts); // undefined
+        this.posts = response;
+        console.log(typeof this.posts); // object
+        console.log(this.posts);
+      });
   }
 
   createPost(input: HTMLInputElement) {
@@ -44,7 +46,7 @@ export class PostsComponent implements OnInit {
 
     let post = { title: input.value };
     input.value = '';
-    this.http.post(this.url, JSON.stringify(post))
+    this.service.createPost(post)
       .subscribe(response => {
         post['id'] = response['id'];
         this.posts.splice(0, 0, post);
@@ -54,7 +56,7 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post) {
-    this.http.patch(this.url + '/' + post['id'], JSON.stringify({ isRead: true }))
+    this.service.updatePost(post)
       .subscribe(response => {
         console.log(response);
       });
@@ -63,7 +65,7 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post) {
-    this.http.delete(this.url + '/' + post['id'])
+    this.service.deletePost(post['id'])
       .subscribe(response => {
         let index = this.posts.indexOf(post);
         this.posts.splice(index, 1);

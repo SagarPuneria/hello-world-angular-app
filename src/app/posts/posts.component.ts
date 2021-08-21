@@ -1,4 +1,5 @@
 // import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
@@ -42,7 +43,7 @@ export class PostsComponent implements OnInit {
           console.log(typeof this.posts); // object
           console.log(this.posts);
         },
-        (error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        (error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           alert('An unexpected error occured.');
           console.log(error);
         }
@@ -62,7 +63,7 @@ export class PostsComponent implements OnInit {
           // console.log(response['id']);
           console.log(this.posts);
         },
-        //(error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        //(error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
         //if (error.status === 400) {
         (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           if (error instanceof NotFoundError) {
@@ -82,7 +83,7 @@ export class PostsComponent implements OnInit {
         response => {
           console.log(response);
         },
-        (error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        (error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           alert('An unexpected error occured.');
           console.log(error);
         }
@@ -98,7 +99,7 @@ export class PostsComponent implements OnInit {
           let index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },
-        //(error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        //(error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
         //if (error.status === 404)
         (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           if (error instanceof NotFoundError)

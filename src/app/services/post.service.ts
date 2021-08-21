@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -29,11 +29,11 @@ export class PostService {
   deletePost(id) {
     return this.http.delete(this.url + '/' + id)
       .pipe(
-        catchError((error: Response) => {
+        catchError((error: HttpErrorResponse) => {
           if (error.status === 404)
-            return Observable.throw(new NotFoundError);
-          return Observable.throw(new AppError(error));
-          // return throwError(new AppError(error))
+            return throwError(new NotFoundError);
+          return throwError(new AppError(error));
+          // return Observable.throw(new AppError(error)) // Observable.throw is deprecated.
         })
       );
   }

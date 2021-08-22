@@ -2,6 +2,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AppError } from '../common/app-error';
+import { BadInput } from '../common/bad-input';
 import { NotFoundError } from '../common/not-found-error';
 import { PostService } from '../services/post.service';
 
@@ -63,11 +64,12 @@ export class PostsComponent implements OnInit {
           // console.log(response['id']);
           console.log(this.posts);
         },
-        //(error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        //(error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
         //if (error.status === 400) {
         (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
-          if (error instanceof NotFoundError) {
-            // this.form.setErrors(error.json())
+          if (error instanceof BadInput) {
+            // this.form.setErrors(error.json());
+            // this.form.setErrors(error.originalError);
           }
           else {
             alert('An unexpected error occured.');

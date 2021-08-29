@@ -1,5 +1,5 @@
 // import { HttpClient } from '@angular/common/http';
-import { HttpErrorResponse } from '@angular/common/http';
+// import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AppError } from '../common/app-error';
 import { BadInput } from '../common/bad-input';
@@ -38,9 +38,9 @@ export class PostsComponent implements OnInit {
     // Called after the constructor and called  after the first ngOnChanges()
     this.service.getAll()
       .subscribe(
-        response => {
+        posts => {
           console.log(typeof this.posts); // undefined
-          this.posts = response;
+          this.posts = posts;
           console.log(typeof this.posts); // object
           console.log(this.posts);
         }// Eventuallly it will hit AppErrorHandler class, so below error handler not required here.
@@ -58,8 +58,8 @@ export class PostsComponent implements OnInit {
     input.value = '';
     this.service.create(post)
       .subscribe(
-        response => {
-          post['id'] = response['id'];
+        newPost => {
+          post['id'] = newPost['id'];
           this.posts.splice(0, 0, post);
           // console.log(response['id']);
           console.log(this.posts);
@@ -84,8 +84,8 @@ export class PostsComponent implements OnInit {
   updatePost(post) {
     this.service.update(post)
       .subscribe(
-        response => {
-          console.log(response);
+        updatedPost => { // response => {
+          console.log(updatedPost);
         }// Eventuallly it will hit AppErrorHandler class, so below error handler not required here.
         /* , (error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           alert('An unexpected error occured.');
@@ -100,7 +100,7 @@ export class PostsComponent implements OnInit {
     this.service.delete(post['id'])
       // this.service.deletePost(101)
       .subscribe(
-        response => {
+        () => {
           let index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },

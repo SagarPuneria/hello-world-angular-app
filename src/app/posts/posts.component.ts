@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
   }
   ngOnInit() {
     // Called after the constructor and called  after the first ngOnChanges()
-    this.service.getPosts()
+    this.service.getAll()
       .subscribe(
         response => {
           console.log(typeof this.posts); // undefined
@@ -56,7 +56,7 @@ export class PostsComponent implements OnInit {
 
     let post = { title: input.value };
     input.value = '';
-    this.service.createPost(post)
+    this.service.create(post)
       .subscribe(
         response => {
           post['id'] = response['id'];
@@ -82,7 +82,7 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post) {
-    this.service.updatePost(post)
+    this.service.update(post)
       .subscribe(
         response => {
           console.log(response);
@@ -97,7 +97,7 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post) {
-    this.service.deletePost(post['id'])
+    this.service.delete(post['id'])
       // this.service.deletePost(101)
       .subscribe(
         response => {

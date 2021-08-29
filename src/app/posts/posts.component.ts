@@ -43,11 +43,11 @@ export class PostsComponent implements OnInit {
           this.posts = response;
           console.log(typeof this.posts); // object
           console.log(this.posts);
-        },
-        (error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        }// Eventuallly it will hit AppErrorHandler class, so below error handler not required here.
+        /* ,(error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           alert('An unexpected error occured.');
           console.log(error);
-        }
+        } */
       );
   }
 
@@ -71,10 +71,12 @@ export class PostsComponent implements OnInit {
             // this.form.setErrors(error.json());
             // this.form.setErrors(error.originalError);
           }
-          else {
+          else throw error;
+          // OR
+          /* else { // Eventuallly it will hit AppErrorHandler class, so below error handler not required here.
             alert('An unexpected error occured.');
             console.log(error);
-          }
+          } */
         }
       );
   }
@@ -84,11 +86,11 @@ export class PostsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-        },
-        (error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        }// Eventuallly it will hit AppErrorHandler class, so below error handler not required here.
+        /* , (error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           alert('An unexpected error occured.');
           console.log(error);
-        }
+        } */
       );
     // OR
     // this.http.put(this.url, JSON.stringify(post));
@@ -96,6 +98,7 @@ export class PostsComponent implements OnInit {
 
   deletePost(post) {
     this.service.deletePost(post['id'])
+      // this.service.deletePost(101)
       .subscribe(
         response => {
           let index = this.posts.indexOf(post);
@@ -106,10 +109,12 @@ export class PostsComponent implements OnInit {
         (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
           if (error instanceof NotFoundError)
             alert('This post has already been deleted.');
-          else {
+          else throw error;
+          // OR
+          /* else { // Eventuallly it will hit AppErrorHandler class, so below error handler not required here.
             alert('An unexpected error occured.');
             console.log(error);
-          }
+          } */
         }
       );
   }

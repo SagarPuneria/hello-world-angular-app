@@ -22,6 +22,8 @@ export class DataService {
     }
 
     create(resource) {
+        // return throwError(new AppError()); // This only to test Optimistic vs Pessimistic
+
         return this.http.post(this.url, JSON.stringify(resource))
             .pipe(map(response => response), catchError(this.handleError));
     }
@@ -32,6 +34,8 @@ export class DataService {
     }
 
     delete(id) {
+        // return throwError(new AppError()); // This only to test Optimistic vs Pessimistic
+
         return this.http.delete(this.url + '/' + id)
             .pipe(map(response => response), catchError(this.handleError));
     }

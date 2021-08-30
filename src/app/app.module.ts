@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { PostService } from './services/post.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GithubFollowersComponent } from './github-followers/github-followers.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     // PostService

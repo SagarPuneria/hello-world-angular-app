@@ -1,0 +1,23 @@
+<p>github-followers works!</p>
+
+<div *ngFor="let follower of followers" class="media">
+    <div style="display:inline-block;" class="media-left">
+        <a href="#">
+            <img class="avatar media-object" src="{{ follower.avatar_url}}">
+        </a>
+    </div>
+    <div style="display:inline-block; vertical-align:super;" class="media-body">
+        <h4 class="media-heading">{{follower.login}}</h4>
+        <a style="vertical-align:super;" href="follower.html_url">{{follower.html_url}}</a>
+    </div>
+    <br/>
+</div>
+<!-- <div *ngFor="let follower of followers" class="d-flex">
+    <div style="display:inline-block;" class="flex-shrink-0">
+        <img class="avatar d-flex-object" src="{{ follower.avatar_url}}">
+    </div>
+    <div style="display:inline-block; vertical-align:super;" class="flex-grow-1 ms-3">
+        <h4 class="d-flex-heading">{{follower.login}}</h4>
+        <a style="vertical-align:super;" href="follower.html_url">{{follower.html_url}}</a>
+    </div>
+</div> --> 

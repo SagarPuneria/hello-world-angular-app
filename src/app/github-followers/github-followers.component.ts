@@ -7,7 +7,7 @@ import { GithubFollowersService } from '../github-followers.service';
   styleUrls: ['./github-followers.component.css']
 })
 export class GithubFollowersComponent implements OnInit {
-  followers;
+  followers: any = [];
 
   constructor(private service: GithubFollowersService) { }
 

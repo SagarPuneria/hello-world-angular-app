@@ -30,8 +30,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'followers/:username', component: GithubProfileComponent },
-      { path: 'followers', component: GithubFollowersComponent },
+      { path: 'followers/:id/:username', component: GithubProfileComponent },
+      { path: 'followers/:id', component: GithubFollowersComponent },
       { path: 'posts', component: PostsComponent },
       { path: '**', component: NotFoundComponent }
     ])
@@ -42,3 +42,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+/*
+ng g c github-followers
+ng g c navbar
+ng g c home
+ng g c github-profile
+ng g c posts
+ng g c not-found
+ng g s post
+ng g s github-followers
+npm install
+ng serve
+*/

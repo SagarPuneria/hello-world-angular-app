@@ -4,14 +4,17 @@ A comprehensive Angular learning project demonstrating core Angular concepts inc
 
 ## 📋 Table of Contents
 
-- [Project Overview](#project-overview)
-- [Project Structure](#project-structure)
-- [Features Demonstrated](#features-demonstrated)
-- [Installation & Setup](#installation--setup)
-- [Development Workflow](#development-workflow)
-- [Code Examples](#code-examples)
-- [Commands Used to Generate Structure](#commands-used-to-generate-structure)
-- [Additional Resources](#additional-resources)
+- [Project Overview](#-project-overview)
+- [Project Structure](#-project-structure)
+- [Features Demonstrated](#-features-demonstrated)
+- [Installation & Setup](#-installation--setup)
+- [Development Workflow](#-development-workflow)
+- [Code Examples](#-code-examples)
+- [Commands Used to Generate Structure](#️-commands-used-to-generate-structure)
+- [Key Learning Concepts](#-key-learning-concepts)
+- [Additional Resources](#-additional-resources)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ## 🎯 Project Overview
 

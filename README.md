@@ -95,7 +95,8 @@ hello-world-angular-app/
 
 2. **Install dependencies**:
    ```bash
-   npm install
+   npm install --legacy-peer-deps
+   npm run build # Build the application
    ```
 
 3. **Start the development server**:

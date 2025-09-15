@@ -157,10 +157,19 @@ body { padding: 20px; }
 ```
 
 ## Development Workflow & Commands
+```bash
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Build the application
+npm run build
+```
 
 ### Development Server
 ```bash
 # Start the development server
+npm start
+or
 ng serve
 # Navigate to http://localhost:4200/
 # The app will automatically reload when you change source files

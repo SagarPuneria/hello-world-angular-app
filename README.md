@@ -94,6 +94,13 @@ src/
 ```
 
 ## Development Commands
+```bash
+# Install dependencie
+npm install --legacy-peer-deps
+
+# Build the application
+npm run build
+```
 
 ### Development server
 ```bash

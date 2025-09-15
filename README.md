@@ -153,7 +153,7 @@ Before running this project, make sure you have the following installed:
 ```bash
 git clone https://github.com/SagarPuneria/hello-world-angular-app.git
 cd hello-world-angular-app
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 

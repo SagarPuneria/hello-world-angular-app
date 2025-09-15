@@ -19,6 +19,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
+            "sourceMap": true,
+            "vendorSourceMap": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -58,7 +60,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hello-world-angular-app:build"
+            "browserTarget": "hello-world-angular-app:build",
+            "sourceMap": true,
+            "vendorSourceMap": true
           },
           "configurations": {
             "production": {

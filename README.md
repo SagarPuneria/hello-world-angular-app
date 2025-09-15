@@ -101,7 +101,10 @@ git clone <repository-url>
 cd hello-world-angular-app
 
 # Install dependencies
-npm install
+npm install --legacy-peer-deps
+
+# Build the application
+npm run build
 
 # Start development server
 npm start

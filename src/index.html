@@ -7,6 +7,108 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    console.log('Angular debugging tools pre-initialized before Angular bootstraps');
+    // Initialize Angular debugging tools early
+    window.ng = window.ng || {};
+    
+    // Set up Angular 8 compatible getComponent function
+    window.ng.getComponent = function(element) {
+      if (!element) {
+        console.warn('No element provided to getComponent');
+        return null;
+      }
+      
+      // Method 1: Use ng.probe (the official Angular 8 way)
+      if (window.ng.probe) {
+        try {
+          const debugElement = window.ng.probe(element);
+          if (debugElement && debugElement.componentInstance) {
+            return debugElement.componentInstance;
+          }
+        } catch (e) {
+          console.warn('ng.probe failed:', e);
+        }
+      }
+      
+      // Method 2: Direct access to Angular's internal context
+      if (element.__ngContext__) {
+        // In Angular 8, component instances are stored in the context
+        const context = element.__ngContext__;
+        if (Array.isArray(context)) {
+          // Look for component instance in the context array
+          for (let i = 0; i < context.length; i++) {
+            const item = context[i];
+            if (item && typeof item === 'object' && item.constructor && item.constructor.name !== 'Object' && item.constructor.name !== 'Array') {
+              return item;
+            }
+          }
+        } else if (context && typeof context === 'object') {
+          return context;
+        }
+      }
+      
+      console.warn('Could not find Angular component for element:', element);
+      return null;
+    };
+    
+    // Set up Angular 8 compatible getInjector function
+    window.ng.getInjector = function(element) {
+      if (!element) {
+        console.warn('No element provided to getInjector');
+        return null;
+      }
+      
+      // Method 1: Use ng.probe to get the injector
+      if (window.ng.probe) {
+        try {
+          const debugElement = window.ng.probe(element);
+          if (debugElement && debugElement.injector) {
+            return debugElement.injector;
+          }
+        } catch (e) {
+          console.warn('ng.probe failed for injector:', e);
+        }
+      }
+      
+      // Method 2: Get injector from the root application
+      if (window.ngRef && window.ngRef.injector) {
+        return window.ngRef.injector;
+      }
+      
+      // Method 3: Try to get injector from component
+      const component = window.ng.getComponent(element);
+      if (component && component.injector) {
+        return component.injector;
+      }
+      
+      console.warn('Could not find Angular injector for element:', element);
+      return null;
+    };
+    
+    // Set up getDirectives function
+    window.ng.getDirectives = function(element) {
+      if (!element) {
+        console.warn('No element provided to getDirectives');
+        return [];
+      }
+      
+      if (window.ng.probe) {
+        try {
+          const debugElement = window.ng.probe(element);
+          if (debugElement && debugElement.references) {
+            return Object.values(debugElement.references);
+          }
+        } catch (e) {
+          console.warn('ng.probe failed for directives:', e);
+        }
+      }
+      
+      return [];
+    };
+    
+    console.log('Available ng functions:', Object.keys(window.ng));
+  </script>
 </head>
 <body>
   <app-root></app-root>

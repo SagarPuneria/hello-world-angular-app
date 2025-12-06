@@ -262,12 +262,19 @@ ng lint
 - **Template Syntax**: Inline vs external templates comparison
 
 ### 6. Comparison with Other Angular Syntax:
+<div align="center">
+
 | Syntax | Purpose | Example | Technical Note |
-|--------|---------|---------|---------|
+|:------:|:-------:|:-------:|:-------:|
 | `[]` | Property Binding (Component → DOM) | `[hidden]="isHidden"` | Property Binding: Data flows from component to DOM |
 | `()` | Event Binding (DOM → Component) | `(click)="onClick()"` | Event Binding: Data flows from DOM to component |
 | `{{}}` | Interpolation (Display data) | `{{title}}` | Interpolation: One-way display of component data in template |
 | `[()]` | Two-way Binding | `[(ngModel)]="name"` | Two-way Binding: Data flows both ways(Combines property and event binding) |
+| `#variable` | Template Reference Variables | `#courseList`, `#noCourses` | Creates local template variable to reference DOM element or component |
+| `ng-template` with `*ngIf` conditions | Conditional Templates | `*ngIf="condition; then tpl1 else tpl2"` | Conditionally renders templates based on expressions |
+
+</div>
+
 ## 🎯 Key Code Examples & Patterns
 
 ### Manual vs CLI Component Comparison
@@ -334,7 +341,9 @@ providers: [CoursesService, LogService] // Manual registration required
 
 **Modern Service Registration (CLI Generated)**:
 ```typescript
-// authors.service.ts - Auto registration  
+// authors.service.ts - Auto registration with dependency injection in action.
+// Created using Angular CLI command: $ ng g s authors
+// No need to register this dependency(AuthorsService) in main app module
 @Injectable({
   providedIn: 'root'
 })
@@ -349,7 +358,9 @@ export class AuthorsService {
     // No manual registration needed
 }
 
-// email.service.ts - Auto registration with dependency injection
+// email.service.ts - Auto registration with dependency injection in action.
+// Created using Angular CLI command: $ ng g s email
+// No need to register this dependency(EmailService) in main app module
 @Injectable({
   providedIn: 'root'
 })

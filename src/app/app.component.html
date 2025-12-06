@@ -34,7 +34,7 @@
 <ul>
   <li *ngFor="let course of listOfCourses; index as i; even as isEven">
     {{i}}-{{course.id}}-{{course.name}} <span *ngIf="isEven">(EVEN)</span>
-    <!-- {{i}}-{{course.name}} <span *ngIf="isEven; then even else odd">(EVEN)</span>
+    <!-- {{i}}-{{course.id}}-{{course.name}} <span *ngIf="isEven; then even else odd">(EVEN)</span>
     <ng-template #even>(EVEN)</ng-template>
     <ng-template #odd>(ODD)</ng-template> -->
   </li>

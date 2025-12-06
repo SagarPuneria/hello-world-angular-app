@@ -32,6 +32,7 @@ hello-world-angular-app/
 │   │   ├── courses.component.ts         # 📚 Manual component (no folder, inline template)
 │   │   ├── courses.service.ts           # 🔧 Manual service (traditional DI)
 │   │   ├── log.service.ts               # 📝 Manual service (traditional DI)
+│   │   ├── debug-example.component.ts   # 🐛 Manual debug component (inline template)
 │   │   │
 │   │   ├── course/                      # 📖 CLI-generated component
 │   │   │   ├── course.component.ts      # Uses EmailService, demonstrates service injection
@@ -50,11 +51,29 @@ hello-world-angular-app/
 │   │
 │   ├── assets/
 │   ├── environments/
-│   └── index.html
-├── e2e/
-├── angular.json
-├── package.json
-└── README.md
+│   │   ├── environment.ts               # Development environment config
+│   │   └── environment.prod.ts          # Production environment config
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── main.ts                          # Bootstrap file
+│   ├── polyfills.ts                     # Browser polyfills
+│   ├── styles.css                       # Global styles
+│   └── test.ts                          # Test configuration
+├── e2e/                                 # End-to-end tests
+│   ├── src/
+│   │   ├── app.e2e-spec.ts
+│   │   └── app.po.ts
+│   ├── protractor.conf.js
+│   └── tsconfig.json
+├── angular.json                         # Angular CLI configuration
+├── browserslist                         # Browser compatibility
+├── karma.conf.js                        # Test runner configuration
+├── package.json                         # Dependencies and scripts
+├── tsconfig.json                        # TypeScript configuration
+├── tsconfig.app.json                    # App-specific TypeScript config
+├── tsconfig.spec.json                   # Test-specific TypeScript config
+├── tslint.json                          # Linting rules
+└── README.md                            # Project documentation
 ```
 
 ### 🛠️ Angular CLI Commands Used

@@ -10,9 +10,9 @@ Below @Injectable({  providedIn: 'root' }) Decorator is dynamically created usin
 export class EmailService {
   services; // 'services' implicitly has an 'any' type
   // OR services: string[];
-  constructor(logService: LogService) {
+  constructor(logService2: LogService) {
     console.log('Before getService, this.services:', this.services)
-    this.services = logService.logService(["get service 1", "get service 2", "get service 3"])
+    this.services = logService2.logService(["get service 1", "get service 2", "get service 3"])
     console.log('After getService, this.services:', this.services)
   }
   getEmails() {

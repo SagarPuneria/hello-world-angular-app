@@ -29,6 +29,8 @@ export class CoursesComponent {
 
     /*
     // Wrong approach: This has two problems with this approach
+    // 1. Tight Coupling
+    // 2. No Dependency Injection Benefits
     constructor() {
         let service = new CoursesService();
         this.courses = service.getCourses();

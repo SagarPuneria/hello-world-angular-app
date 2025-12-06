@@ -8,11 +8,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { DebugExampleComponent } from './debug-example.component';
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent, // This Component was manually created
-    CourseComponent, AuthorsComponent
+    CourseComponent, AuthorsComponent,
+    DebugExampleComponent
   ],
   imports: [
     BrowserModule

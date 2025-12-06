@@ -12,14 +12,16 @@
 
 <!-- hidden used for small element trees. if condition is true then div block is hidden else not hidden -->
 <div [hidden]="coursesList.length == 0">
-  List of hidden courses
+  <!-- The square brackets [] indicate property binding -->
+  List of hidden courses, {{coursesList.length}}
 </div>
 <div [hidden]="coursesList.length > 0">
-  No hidden courses
+  No hidden courses, {{coursesList.length}}
 </div>
 <p hidden>This paragraph should be hidden.</p>
 
 <ul class="nav nav-pills">
+  <!-- CSS class binding -->
   <li [class.active]="viewMode=='map'"><a (click)="viewMode='map'">Map View</a></li>
   <li [class.active]="viewMode=='list'"><a (click)="viewMode='list'">List View</a></li>
 </ul>
@@ -48,3 +50,5 @@
 </ul>
 
 <authors></authors>
+
+<app-debug-example></app-debug-example>

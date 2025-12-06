@@ -9,12 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class CourseComponent implements OnInit {
   title = "List of emails";
   emails;
-  constructor(public service: EmailService) {
-    console.log('Before service, this.emails:', this.emails)
-    this.emails = service.getEmails();
-    console.log('After service, this.emails:', this.emails)
+  constructor(public service2: EmailService) {
+    console.log('Before service2, this.emails:', this.emails)
+    this.emails = service2.getEmails();
+    console.log('After service2, this.emails:', this.emails)
   }
   ngOnInit() {
+    console.log('Component name: app-course, ngOnInit called');
   }
 
 }

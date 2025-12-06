@@ -262,7 +262,7 @@ ng lint
 - **Template Syntax**: Inline vs external templates comparison
 
 ### 6. Comparison with Other Angular Syntax:
-| Syntax | Purpose | Example | Comment |
+| Syntax | Purpose | Example | Technical Note |
 |--------|---------|---------|---------|
 | `[]` | Property Binding (Component → DOM) | `[hidden]="isHidden"` | Property Binding: Data flows from component to DOM |
 | `()` | Event Binding (DOM → Component) | `(click)="onClick()"` | Event Binding: Data flows from DOM to component |

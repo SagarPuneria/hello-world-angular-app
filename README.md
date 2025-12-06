@@ -262,14 +262,12 @@ ng lint
 - **Template Syntax**: Inline vs external templates comparison
 
 ### 6. Comparison with Other Angular Syntax:
-| Syntax | Purpose | Example |
-|--------|---------|---------|
-| `[]` | Property Binding (Component → DOM) | `[hidden]="isHidden"` |
-| `()` | Event Binding (DOM → Component) | `(click)="onClick()"` |
-| `{{}}` | Interpolation (Display data) | `{{title}}` |
-| `[()]` | Two-way Binding | `[(ngModel)]="name"` |
-
-
+| Syntax | Purpose | Example | Comment |
+|--------|---------|---------|---------|
+| `[]` | Property Binding (Component → DOM) | `[hidden]="isHidden"` | Property Binding: Data flows from component to DOM |
+| `()` | Event Binding (DOM → Component) | `(click)="onClick()"` | Event Binding: Data flows from DOM to component |
+| `{{}}` | Interpolation (Display data) | `{{title}}` | Interpolation: One-way display of component data in template |
+| `[()]` | Two-way Binding | `[(ngModel)]="name"` | Two-way Binding: Data flows both ways(Combines property and event binding) |
 ## 🎯 Key Code Examples & Patterns
 
 ### Manual vs CLI Component Comparison

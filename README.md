@@ -261,6 +261,15 @@ ng lint
 - **Array Manipulation**: Dynamic list updates and length tracking
 - **Template Syntax**: Inline vs external templates comparison
 
+### 6. Comparison with Other Angular Syntax:
+| Syntax | Purpose | Example |
+|--------|---------|---------|
+| `[]` | Property Binding (Component → DOM) | `[hidden]="isHidden"` |
+| `()` | Event Binding (DOM → Component) | `(click)="onClick()"` |
+| `{{}}` | Interpolation (Display data) | `{{title}}` |
+| `[()]` | Two-way Binding | `[(ngModel)]="name"` |
+
+
 ## 🎯 Key Code Examples & Patterns
 
 ### Manual vs CLI Component Comparison

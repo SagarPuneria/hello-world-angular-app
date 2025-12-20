@@ -4,18 +4,18 @@ import { Component } from "@angular/core";
 @Component({
     selector: 'courses',
     template: `
-        <!-- <input (keyup.enter)="onKeyUp($event)"/> -->
-
+        <input (keyup.enter)="onKeyUp($event)"/>
+        <br/>
         <!-- Template Variables -->
-        <input #email (keyup.enter)="onKeyUp(email.value)"/>
+        <input #email (keyup.enter)="onKeyUp2(email.value)"/>
     `
 })
 
 export class CoursesComponent {
-    /* onKeyUp($event) {
+    onKeyUp($event) {
         console.log($event.target.value);
-    } */
-    onKeyUp(email) {
+    }
+    onKeyUp2(email) {
         console.log(email);
     }
 }

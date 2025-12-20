@@ -16,5 +16,5 @@ import { Component } from "@angular/core";
 
 export class CoursesComponent {
     title = "List of courses";
-    imageUrl = "http://lorempixel.com/400/200/"
+    imageUrl = "https://i.imgur.com/yXOvdOSs.jpg"
 }

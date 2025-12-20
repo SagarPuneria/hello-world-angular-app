@@ -56,12 +56,15 @@ ng generate pipe summary
 ### Manual Components Created
 The following components were created manually for progressive learning:
 - **`courses.component.ts`** - Basic property binding and string interpolation concepts
-- **`courses2.component.ts` to `courses10.component.ts`** - Progressive learning examples covering:
-  - Event binding and handling
-  - Class and style binding
-  - Template reference variables
-  - Two-way data binding with ngModel
-  - Advanced component interactions
+- **`courses2.component.ts`** - Property binding and attribute binding
+- **`courses3.component.ts`** - Class and style binding
+- **`courses4.component.ts`** - Event binding fundamentals
+- **`courses5.component.ts`** - Event binding and event bubbling with stopPropagation
+- **`courses6.component.ts`** - Event filtering (keyboard events)
+- **`courses7.component.ts`** - Template variables and event handling
+- **`courses8.component.ts`** - Two-way data binding with ngModel directive
+- **`courses9.component.ts`** - Built-in pipes (uppercase, lowercase, number, currency, date)
+- **`courses10.component.ts`** - Advanced component interactions
 
 ## Detailed Project Structure
 
@@ -291,12 +294,21 @@ npm audit fix                           # Auto-fix issues
 ## Angular Concepts Demonstrated
 
 ### 1. Data Binding Techniques
-- **String Interpolation**: `{{ title }}` - Display component properties
-- **Property Binding**: `[src]="imageUrl"` - Bind to DOM element properties  
-- **Event Binding**: `(click)="onClick()"` - Handle user interactions
-- **Two-Way Binding**: `[(ngModel)]="name"` - Synchronize component and view
+- **String Interpolation**: `{{ title }}` - Display component properties in templates
+- **Property Binding**: `[src]="imageUrl"` - Bind component data to DOM element properties  
+- **Event Binding**: `(click)="onClick()"` - Handle DOM events and user interactions
+- **Event Filtering**: `(keyup.enter)="onEnter()"` - Filter events by specific keys (enter, escape, etc.)
+- **Event Bubbling**: Understanding event propagation and using `$event.stopPropagation()`
+- **Two-Way Binding**: `[(ngModel)]="name"` - Synchronize component properties with input fields
 
-### 2. Component Architecture
+### 2. Built-in Pipes for Data Transformation
+- **Text Pipes**: `uppercase`, `lowercase` - Transform text case
+- **Number Pipe**: `{{ value | number:'1.2-2' }}` - Format numbers with decimal precision
+- **Currency Pipe**: `{{ price | currency:'USD':true }}` - Format monetary values with currency symbols
+- **Date Pipe**: `{{ date | date:'shortDate' }}` - Format dates in various formats
+- **Pipe Chaining**: Apply multiple pipes sequentially for complex transformations
+
+### 3. Component Architecture
 - **Generated Components**: Created with Angular CLI scaffolding
 - **Manual Components**: Hand-crafted for learning specific concepts
 - **Component Communication**: Input/Output properties for parent-child interaction
@@ -320,28 +332,66 @@ npm audit fix                           # Auto-fix issues
 
 ## Project Learning Progression
 
-### Phase 1: Basic Concepts (courses.component.ts)
-- String interpolation syntax
-- Property binding fundamentals
-- Template structure and organization
+### Phase 1: Basic Concepts (courses.component.ts - courses3.component.ts)
+- String interpolation syntax: `{{ property }}`
+- Property binding fundamentals: `[property]="value"`
+- Attribute binding: `[attr.colspan]="value"`
+- CSS class binding: `[class.active]="isActive"`
+- Style binding: `[style.backgroundColor]="color"`
 
-### Phase 2: Event Handling (courses2-4.component.ts)
-- Click event binding
-- Event object handling
-- Template reference variables
-- CSS class and style binding
+### Phase 2: Event Handling (courses4.component.ts - courses6.component.ts)
+- Basic event binding: `(click)="onClick()"`
+- Event object handling: `$event` parameter
+- Event bubbling and propagation: `$event.stopPropagation()`
+- Event filtering: `(keyup.enter)="onEnter()"` for keyboard shortcuts
+- Template reference variables: `#variable` for accessing elements
 
-### Phase 3: Advanced Interactions (courses5-7.component.ts)
-- Custom event handling
-- Component input properties
-- Component output events
-- Parent-child communication patterns
+### Phase 3: Two-Way Binding (courses7.component.ts - courses8.component.ts)
+- Manual two-way binding: `[value]="email" (input)="email=$event.target.value"`
+- ngModel directive: `[(ngModel)]="email"` (requires FormsModule)
+- Template-driven forms basics
+- Input field synchronization with component properties
 
-### Phase 4: Forms and Data (courses8-10.component.ts)
-- Two-way data binding with ngModel
-- Form validation techniques
-- Component lifecycle hooks
+### Phase 4: Data Transformation (courses9.component.ts - courses10.component.ts)
+- Built-in pipes: uppercase, lowercase, number, currency, date
+- Pipe parameters: `{{ value | pipe:'parameter' }}`
+- Pipe chaining: `{{ text | uppercase | lowercase }}`
+- Custom pipes: Creating reusable data transformers
 - Advanced component patterns and best practices
+
+## Key Angular Features & Directives
+
+### Event Binding Modifiers
+- **Keyboard Events**: `(keyup.enter)`, `(keyup.escape)`, `(keyup.space)`, `(keyup.tab)`
+- **Mouse Events**: `(click)`, `(dblclick)`, `(mouseenter)`, `(mouseleave)`
+- **Form Events**: `(submit)`, `(input)`, `(change)`, `(blur)`, `(focus)`
+
+### Event Object Methods
+- **`$event.stopPropagation()`**: Prevents event from bubbling to parent elements
+- **`$event.preventDefault()`**: Prevents default browser behavior (e.g., form submission)
+- **`$event.target`**: References the element that triggered the event
+- **`$event.currentTarget`**: References the element the event listener is attached to
+
+### Built-in Pipe Parameters
+```typescript
+// Number Pipe: {{ value | number:'minIntegerDigits.minFractionDigits-maxFractionDigits' }}
+{{ 1234.5678 | number:'1.2-2' }}  // Output: 1,234.57
+
+// Currency Pipe: {{ value | currency:'code':display:'digitInfo' }}
+{{ 99.95 | currency:'USD':true:'1.2-2' }}  // Output: $99.95
+{{ 99.95 | currency:'EUR':'symbol':'1.2-2' }}  // Output: €99.95
+
+// Date Pipe: {{ value | date:'format' }}
+{{ today | date:'short' }}        // Output: 12/20/25, 10:30 AM
+{{ today | date:'fullDate' }}     // Output: Friday, December 20, 2025
+{{ today | date:'yyyy-MM-dd' }}   // Output: 2025-12-20
+```
+
+### ngModel Requirements
+- **Syntax**: `[(ngModel)]="propertyName"` (banana-in-a-box syntax)
+- **Module**: Requires `FormsModule` from `@angular/forms`
+- **Purpose**: Two-way data binding for form inputs
+- **Alternative**: Manual binding with `[value]` and `(input)` events
 
 ## Git Branch Structure
 
@@ -403,10 +453,110 @@ npm install -g @angular/cli@8.1.0
 @import "~font-awesome/css/font-awesome.css";
 ```
 
-**Issue**: ngModel not working
-```bash
-# Ensure FormsModule is imported in app.module.ts
+**Issue**: `Can't bind to 'ngModel' since it isn't a known property of 'input'`
+
+**Solution**: Ensure FormsModule is imported in your module(`app.module.ts`)
+```typescript
+// In app.module.ts
 import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [/* ... */],
+  imports: [
+    BrowserModule,
+    FormsModule  // Add this line
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+**For Standalone Components** (Angular 14+):
+```typescript
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [FormsModule],  // Add FormsModule here
+  template: `<input [(ngModel)]="value"/>`
+})
+export class ExampleComponent { }
+```
+
+**Issue**: `No pipe found with name 'currency'`, `'date'`, or `'number'`
+
+**Solution**: Import CommonModule for built-in pipes
+```typescript
+// In app.module.ts (Module-based approach)
+import { CommonModule } from '@angular/common';
+
+@NgModule({
+  declarations: [/* ... */],
+  imports: [
+    BrowserModule,
+    CommonModule  // Usually included by default in AppModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+**For Standalone Components**:
+```typescript
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [CommonModule],  // Provides all built-in pipes
+  template: `{{ price | currency:'USD' }}`
+})
+export class ExampleComponent { }
+```
+
+**Alternative**: Import specific pipes for better tree-shaking
+```typescript
+import { CurrencyPipe, DatePipe, DecimalPipe } from '@angular/common';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [CurrencyPipe, DatePipe, DecimalPipe],
+  template: `
+    {{ price | currency:'USD' }}
+    {{ today | date:'short' }}
+    {{ value | number:'1.2-2' }}
+  `
+})
+export class ExampleComponent { }
+```
+
+**Issue**: Event bubbling causing unwanted parent element event triggers
+
+**Solution**: Use `$event.stopPropagation()` to prevent event bubbling
+```typescript
+@Component({
+  template: `
+    <div (click)="onDivClicked()">
+      <button (click)="onButtonClicked($event)">Click Me</button>
+    </div>
+  `
+})
+export class ExampleComponent {
+  onButtonClicked($event: Event) {
+    $event.stopPropagation();  // Prevents onDivClicked from firing
+    console.log('Button clicked');
+  }
+  
+  onDivClicked() {
+    console.log('Div clicked');
+  }
+}
 ```
 
 ## Additional Resources

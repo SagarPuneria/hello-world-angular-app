@@ -17,6 +17,6 @@ export class CoursesComponent {
     onSave($event) {
         $event.stopPropagation(); // Stop Event Bubbling
 
-        console.log("Button was clicked", $event); // Event Binding
+        console.log("Save button was clicked", $event); // Event Binding
     }
 }

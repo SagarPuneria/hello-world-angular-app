@@ -2,6 +2,7 @@ import { SummaryPipe } from './summary.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
@@ -21,13 +22,14 @@ import { TitleCasePipe } from './title-case.pipe';
   declarations: [
     AppComponent,
     CoursesComponent, // This Component was manually created
-    SummaryPipe,
+    SummaryPipe, // This is required for courses10.component
     FavoriteComponent,
-    TitleCasePipe,
+    TitleCasePipe, // This is required for app.component
   ],
   imports: [
     BrowserModule,
-    FormsModule // courses8.component.ts => ngModel directive is defiend in FormsModule
+    FormsModule, // app.component.ts and courses8.component.ts => ngModel directive is defiend in FormsModule('ngModel' not available by default, so we need to import FormsModule)
+    CommonModule // This module is required for all built-in pipes like 'currency', 'date', and 'number'
   ],
   providers: [],
   bootstrap: [AppComponent]

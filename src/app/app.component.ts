@@ -14,15 +14,15 @@ export class AppComponent {
   // onFavoriteChange(isFavorite: any) { // isFavorite: any => Intellisense won't work in this method, if isFavorite is object.
   // onFavoriteChange(eventArgs: { newValue: boolean }) {
   onFavoriteChange(eventArgs: FavoriteComponentEventArgs) { // To make FavoriteComponentEventArgs reusable across the app, import from FavoriteComponent.
-    console.log("Favorite changed:", eventArgs);
+    console.log("app.component: favorite icon changed:", this.post.isSelected, eventArgs);
   }
   tweet = {
     body: "Here is the body of tweet ....",
     isLiked: true,
     likesCount: 10
   }
-  /* imageUrl = "http://lorempixel.com/400/200/";
+  imageUrl = "https://i.imgur.com/yXOvdOSs.jpg";
   onClick() {
     console.log("button was clicked");
-  } */
+  }
 }

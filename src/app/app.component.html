@@ -1,20 +1,43 @@
 <h1>Welcome to {{ post.title }}</h1>
 <!-- // Property Binding -->
-<!-- <img [src]="imageUrl" /> -->
+<img [src]="imageUrl" />
 <!-- <br /> -->
-<!-- // Evenet Binding -->
-<!-- <button (click)="onClick()"></button> -->
+<!-- // Event Binding -->
+<button (click)="onClick()">Save</button>
 
-<!-- // [isFavorite] is Input Property/Property Binding and (change) is Output Property/Evenet Binding -->
-<!-- // Now favorite component currently doesn't have public API, 
-  // because it doesn't have any input/output properties(i.e,@Input(), @Output()) in favorite.component.ts.
-  // And in other words, we cannot use Property Binding and Evenet Binding. -->
-<!-- <favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange()"></favorite> -->
+<!-- 
+Suppose favorite component doesn't have any input/output properties(i.e, @Input(), @Output()) in favorite.component.ts, 
+You cannot use favorite component as public API, 
+And in other words, we cannot use Property Binding and Event Binding. -->
+<!-- <favorite [isFavorite]="post.isSelected" (change2)="onFavoriteChange()"></favorite> -->
 
-<favorite [isFavorite]="post.isSelected" (change)="onFavoriteChange($event)"></favorite>
+<!-- 
+// Parent Component: app.component.ts (AppComponent)
+// Child Component: favorite.component.ts (FavoriteComponent)
+Input Property Binding [isFavorite]:
+  * Uses square brackets []
+  * Data flows: Parent Component → Child Component
+  * Passes data down to child components
+  * The child receives data via @Input() decorator 
+
+Output Property/Event Binding (change2):
+  * Uses parentheses ()
+  * Data flows: Child Component → Parent Component
+  * Emits events from child to parent
+  * The child emits events via @Output() with EventEmitter
+-->
+<favorite [isFavorite]="post.isSelected" (change2)="onFavoriteChange($event)"></favorite>
 <favorite-user></favorite-user>
 
-<!-- ng-container not render this ng-container element in the DOM. -->
+<!-- ng-container is a logical container that does not render as an actual DOM element. -->
+<!-- 
+The ng-container itself won't appear in the DOM, but its content ("Heading") will be projected 
+into the panel component where <ng-content select=".heading"></ng-content> is placed.
+
+Note: The class="heading" on ng-container is used as a selector for content projection, 
+even though ng-container itself doesn't render in the DOM. 
+Angular uses it during the projection process to match the content with the correct <ng-content> slot. 
+-->
 <bootstrap-panel>
   <ng-container class="heading">Heading</ng-container>
   <div class="body">

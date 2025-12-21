@@ -40,7 +40,7 @@ ng generate component panel
 - **Purpose**: Displays a toggleable star icon for marking items as favorite
 - **Features**: 
   - Input property `[isFavorite]` for initial state
-  - Output event `(change)` for state changes
+  - Output event `(change2)` for state changes
   - Font Awesome star icons with dynamic styling
 - **Generated with**: `ng generate component favorite`
 
@@ -95,7 +95,7 @@ src/
 
 ## Development Commands
 ```bash
-# Install dependencie
+# Install dependencies
 npm install --legacy-peer-deps
 
 # Build the application
@@ -142,26 +142,39 @@ ng lint
 ## Learning Concepts Demonstrated
 
 ### 1. Input Properties (Property Binding)
+**Data Flow**: Parent Component → Child Component → DOM Element
+
 ```typescript
 @Input('isFavorite') isSelected: boolean;
 ```
 ```html
+<!-- AppComponent (parent) passes data to FavoriteComponent (child) -->
 <favorite [isFavorite]="post.isSelected"></favorite>
 ```
+- Uses square brackets `[]`
+- Parent component (`app.component`) passes data down to child component (`favorite.component`)
+- Child receives data via `@Input()` decorator
 
 ### 2. Output Properties (Event Binding)
+**Data Flow**: DOM Element → Child Component → Parent Component
+
 ```typescript
-@Output('change') click = new EventEmitter();
+@Output('change2') click2 = new EventEmitter();
 ```
 ```html
-<favorite (change)="onFavoriteChange($event)"></favorite>
+<!-- FavoriteComponent (child) emits events to AppComponent (parent) -->
+<favorite (change2)="onFavoriteChange($event)"></favorite>
 ```
+- Uses parentheses `()`
+- Child component (`favorite.component`) emits events to parent component (`app.component`)
+- Child emits events via `@Output()` with `EventEmitter`
+- Parent handles events with event handler methods
 
 ### 3. Event Handling
 ```typescript
 onClick() {
   this.isSelected = !this.isSelected;
-  this.click.emit({ newValue: this.isSelected });
+  this.click2.emit({ newValue: this.isSelected });
 }
 ```
 
@@ -172,6 +185,70 @@ onClick() {
       [class.fa-star-o]="!isSelected">
 </span>
 ```
+
+### 5. Content Projection (ng-content)
+Content projection allows you to create reusable components by injecting content from the parent component into designated slots in the child component.
+
+```html
+<!-- Parent component (app.component.html) -->
+<bootstrap-panel>
+  <ng-container class="heading">Heading</ng-container>
+  <div class="body">
+    <h2>Body</h2>
+    <p>Some content here ...</p>
+  </div>
+</bootstrap-panel>
+```
+
+```html
+<!-- Child component (panel.component.html) -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <ng-content select=".heading"></ng-content>
+  </div>
+  <div class="panel-body">
+    <ng-content select=".body"></ng-content>
+  </div>
+</div>
+```
+
+**Key Points**:
+- `<ng-content select=".heading">` - Projects content with class `.heading` from parent
+- `<ng-container>` - Logical container that doesn't render in DOM, but its class selector is used for projection
+- This pattern enables flexible, reusable components where the parent controls the content
+
+### 6. Component Public API
+A component's **public API** consists of its `@Input()` and `@Output()` properties:
+- Without these decorators, parent components cannot communicate with the component
+- `@Input()` properties allow data to flow into the component
+- `@Output()` properties allow events to flow out of the component
+
+```typescript
+// Exporting interfaces for type safety and reusability
+export interface FavoriteComponentEventArgs {
+  newValue: boolean
+}
+```
+
+**Benefits of exporting interfaces**:
+- Provides IntelliSense support in parent components
+- Ensures type safety when handling events
+- Makes the event structure reusable across the application
+
+### 7. Aliasing Input/Output Properties
+```typescript
+// Input aliasing (preferred approach)
+@Input('isFavorite') isSelected: boolean;
+// External name: 'isFavorite', Internal name: 'isSelected'
+
+// Output aliasing (preferred approach)  
+@Output('change2') click2 = new EventEmitter();
+// External name: 'change2', Internal name: 'click2'
+```
+
+**Why use aliasing?**:
+- External API can remain stable while internal implementation changes
+- Provides better encapsulation and flexibility
 
 ## Branch Information
 

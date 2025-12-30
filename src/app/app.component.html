@@ -16,13 +16,13 @@ And in other words, we cannot use Property Binding and Event Binding. -->
 // Child Component: favorite.component.ts (FavoriteComponent)
 Input Property Binding [isFavorite]:
   * Uses square brackets []
-  * Data flows: Parent Component → Child Component
+  * Data flows: Parent Component → Child Component → DOM Element
   * Passes data down to child components
   * The child receives data via @Input() decorator 
 
 Output Property/Event Binding (change2):
   * Uses parentheses ()
-  * Data flows: Child Component → Parent Component
+  * Data flows: DOM Element → Child Component → Parent Component
   * Emits events from child to parent
   * The child emits events via @Output() with EventEmitter
 -->

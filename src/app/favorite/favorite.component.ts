@@ -16,7 +16,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 })
 export class FavoriteComponent implements OnInit {
   // @Input() isFavorite: boolean; // First approach: Input Properties concept(Not preffered approach)
-  @Input('isFavorite') isSelected: boolean; // Second approach: Aliasing Input Properties(Preffered approach)
+  @Input('isFavorite') isSelected2: boolean; // Second approach: Aliasing Input Properties(Preffered approach)
 
   // @Output() change2 = new EventEmitter(); // First approach: Output Properties concept(Not preffered approach)
   @Output('change2') click2 = new EventEmitter();  // Second approach: Aliasing Output Properties(Preffered approach)
@@ -27,13 +27,13 @@ export class FavoriteComponent implements OnInit {
   }
 
   onClick() {
-    console.log("favorite.component: favorite icon changed:", this.isSelected);
+    console.log("favorite.component: favorite icon changed:", this.isSelected2);
     // this.isFavorite = !this.isFavorite; // (First approach: Not preffered approach)
-    this.isSelected = !this.isSelected; // (Second approach: Preffered approach)
+    this.isSelected2 = !this.isSelected2; // (Second approach: Preffered approach)
 
     // Passing Event Data
     // this.change.emit(this.isSelected); // Simple component, just passing boolean value
-    this.click2.emit({ newValue: this.isSelected }); // Complex component, just passing object
+    this.click2.emit({ newValue: this.isSelected2 }); // Complex component, just passing object
   }
 
 }

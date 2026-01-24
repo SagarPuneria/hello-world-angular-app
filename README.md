@@ -145,9 +145,11 @@ ng lint
 **Data Flow**: Parent Component → Child Component → DOM Element
 
 ```typescript
-@Input('isFavorite') isSelected: boolean;
+// src/app/favorite/favorite.component.ts:
+@Input('isFavorite') isSelected2: boolean;
 ```
 ```html
+<!-- src/app/app.component.html: -->
 <!-- AppComponent (parent) passes data to FavoriteComponent (child) -->
 <favorite [isFavorite]="post.isSelected"></favorite>
 ```
@@ -159,9 +161,11 @@ ng lint
 **Data Flow**: DOM Element → Child Component → Parent Component
 
 ```typescript
+// src/app/favorite/favorite.component.ts:
 @Output('change2') click2 = new EventEmitter();
 ```
 ```html
+<!-- src/app/app.component.html: -->
 <!-- FavoriteComponent (child) emits events to AppComponent (parent) -->
 <favorite (change2)="onFavoriteChange($event)"></favorite>
 ```
@@ -172,17 +176,19 @@ ng lint
 
 ### 3. Event Handling
 ```typescript
+// src/app/favorite/favorite.component.ts:
 onClick() {
-  this.isSelected = !this.isSelected;
-  this.click2.emit({ newValue: this.isSelected });
+  this.isSelected2 = !this.isSelected2;
+  this.click2.emit({ newValue: this.isSelected2 });
 }
 ```
 
 ### 4. Dynamic Class Binding
 ```html
+<!-- src/app/favorite/favorite.component.html: -->
 <span class="fa" 
-      [class.fa-star]="isSelected" 
-      [class.fa-star-o]="!isSelected">
+      [class.fa-star]="isSelected2" 
+      [class.fa-star-o]="!isSelected2">
 </span>
 ```
 
@@ -224,6 +230,7 @@ A component's **public API** consists of its `@Input()` and `@Output()` properti
 - `@Output()` properties allow events to flow out of the component
 
 ```typescript
+// src/app/favorite/favorite.component.ts:
 // Exporting interfaces for type safety and reusability
 export interface FavoriteComponentEventArgs {
   newValue: boolean
@@ -237,9 +244,10 @@ export interface FavoriteComponentEventArgs {
 
 ### 7. Aliasing Input/Output Properties
 ```typescript
+// src/app/favorite/favorite.component.ts:
 // Input aliasing (preferred approach)
-@Input('isFavorite') isSelected: boolean;
-// External name: 'isFavorite', Internal name: 'isSelected'
+@Input('isFavorite') isSelected2: boolean;
+// External name: 'isFavorite', Internal name: 'isSelected2'
 
 // Output aliasing (preferred approach)  
 @Output('change2') click2 = new EventEmitter();
@@ -252,7 +260,7 @@ export interface FavoriteComponentEventArgs {
 
 ## Branch Information
 
-**Current Branch**: `2_DisplayingData_And_HandlingEvents`
+**Current Branch**: `3_Building_Re-usable_Components`
 This branch focuses on demonstrating data display and event handling patterns in Angular.
 
 ## Further help

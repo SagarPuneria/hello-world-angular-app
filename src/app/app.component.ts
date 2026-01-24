@@ -14,14 +14,15 @@ export class AppComponent {
   ];
   viewMode = 'map';
   onAdd() {
-    this.courses.push({ id: 4, name: 'course' });
+    const newId = Math.max(...this.courses.map(c => c.id)) + 1;
+    this.courses.push({ id: newId, name: 'course'+newId });
   }
   onRemove(course1) {
     let index = this.courses.indexOf(course1);
     this.courses.splice(index, 1);
   }
   onChange(course1) {
-    course1.name = 'UPDATED';
+    course1.name = course1.name+' UPDATED';
   }
   loadCourses() {
     this.courses = [
@@ -31,15 +32,14 @@ export class AppComponent {
     ];
   }
   trackCourse(i, c) {
-    console.log(i, c);
+    console.log("trackCourse", i, c);
     return c ? c.id : undefined;
   }
   canSave = true;
   task = {
     title: 'Review applications',
     // assignee: null
-    assignee: {
-      name: 'Sagar Puneria'
-    }
+    assignee: {  name: 'Sagar Puneria' }
   }
+  // task = null
 }

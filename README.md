@@ -151,6 +151,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Custom Directive Usage
 ```html
+src/app/app.component.html:
 <!-- Input format directive -->
 <input type="text" [appInputFormat]="'uppercase'">
 <input type="text" [appInputFormat]="'lowercase'">
@@ -158,6 +159,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Component with Content Projection
 ```html
+src/app/app.component.html:
 <!-- Zippy component usage -->
 <zippy [title]="'Shipping Details'">
   <p>Your shipping information goes here...</p>
@@ -170,6 +172,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Structural Directives
 ```html
+src/app/app.component.html:
 <!-- Conditional rendering -->
 <div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
 <ng-template #coursesList>
@@ -193,6 +196,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Dynamic Styling
 ```html
+src/app/app.component.html:
 <!-- Dynamic classes and styles -->
 <button [ngStyle]="{
     'backgroundColor': canSave ? 'blue' : 'gray',
@@ -273,6 +277,178 @@ ng g class model/user          # Generate class
 - TrackBy functions for efficient list rendering
 - OnPush change detection strategy
 - Lazy loading and code splitting
+
+### 5. Host Listeners and DOM Events
+
+#### Focus vs Blur Events
+- **`focus`**: Triggered when an element (like an input) gains keyboard or mouse focus
+  - Fires when user clicks into a text box
+  - Indicates that the user starts editing
+- **`blur`**: Triggered when an element loses focus
+  - Fires when user clicks or tabs away from the input
+  - Indicates that the user stops editing
+  - Ideal for applying transformations or validations after user input
+
+#### Implementation Example
+```typescript
+src/app/input-format.directive.ts:
+@HostListener('focus') onFocus() {
+  console.log("on Focus");
+}
+
+@HostListener('blur') onBlur() {
+  console.log("on Blur");
+  // Transform input value after user finishes editing
+  let value: string = this.el.nativeElement.value;
+  if (this.format == 'lowercase')
+    this.el.nativeElement.value = value.toLowerCase();
+  else
+    this.el.nativeElement.value = value.toUpperCase();
+}
+```
+
+### 6. Content Projection with ng-content
+
+Content projection (also called "transclusion") allows you to create reusable components that can wrap and display dynamic content passed from parent components. This is similar to slots in Web Components or children props in React.
+
+#### What is `<ng-content>`?
+`<ng-content>` is a placeholder in a child component's template where content from the parent component will be inserted.
+
+#### How It Works
+
+**Child Component Template** ([zippy.component.html](src/app/zippy/zippy.component.html)):
+```html
+<div class="zippy">
+    <div class="zippy-heading" [class.expanded]="isExpanded" (click)="toggle()">
+        {{title}}
+        <span class="fa" [ngClass]="{
+            'fa-chevron-up':isExpanded,
+            'fa-chevron-down':!isExpanded
+        }"></span>
+    </div>
+    <div *ngIf="isExpanded" class="zippy-body">
+        <ng-content></ng-content>  <!-- Content projection slot -->
+    </div>
+</div>
+```
+
+**Parent Component Usage** ([app.component.html](src/app/app.component.html)):
+```html
+<!-- Example 1: With property binding -->
+<zippy [title]="'Shipping Details'">
+  Shipping Details Content  <!-- This content is projected into <ng-content> -->
+</zippy>
+
+<!-- Example 2: With simple attribute -->
+<zippy title="Billing Details">
+  Billing Details Content  <!-- This content is projected into <ng-content> -->
+</zippy>
+```
+
+#### How Content is Rendered
+When Angular renders the zippy component:
+1. The `title` property controls the heading text
+2. Content between `<zippy>` and `</zippy>` tags is projected into `<ng-content>`
+3. The projected content appears inside the `.zippy-body` div when expanded
+
+**Rendered Output (when expanded):**
+```html
+<div class="zippy">
+    <div class="zippy-heading expanded">
+        Shipping Details
+        <span class="fa fa-chevron-up"></span>
+    </div>
+    <div class="zippy-body">
+        Shipping Details Content  <!-- Projected content appears here -->
+    </div>
+</div>
+```
+
+#### Benefits of Content Projection
+- **Reusability**: Create flexible components that work with different content
+- **Encapsulation**: Component logic is separated from the content it displays
+- **Flexibility**: Parent components control what content to display
+- **Composition**: Build complex UIs by composing simpler components
+
+#### Advanced: Multi-slot Content Projection
+You can also use `select` attribute for multiple projection slots:
+```html
+<!-- Child component -->
+<ng-content select="[header]"></ng-content>
+<ng-content select="[body]"></ng-content>
+<ng-content select="[footer]"></ng-content>
+
+<!-- Parent usage -->
+<my-component>
+  <div header>Header Content</div>
+  <div body>Body Content</div>
+  <div footer>Footer Content</div>
+</my-component>
+```
+
+### 7. Change Detection and TrackBy Function
+
+#### How Change Detection Works with User Interactions
+When DOM events occur (like focus, blur, click, input), Angular's change detection cycle is automatically triggered:
+
+1. **Event Trigger**: User interacts with an element (e.g., clicking on an input)
+2. **Change Detection Starts**: Angular re-evaluates all bindings in the component
+3. **TrackBy Execution**: For `*ngFor` loops with `trackBy`, the tracking function is called for each item
+4. **DOM Update**: Angular updates only the changed elements
+
+#### TrackBy Function Purpose
+```typescript
+src/app/app.component.ts:
+trackCourse(index: number, course: any) {
+  console.log("trackCourse", index, course);
+  return course ? course.id : undefined;
+}
+```
+
+**Key Points:**
+- TrackBy helps Angular identify which items have changed in a list
+- Returns a unique identifier (usually `id`) for each item
+- Prevents unnecessary DOM re-rendering when list items are modified
+- Gets called during every change detection cycle that affects the list
+
+#### When TrackBy Logs Appear
+The `trackCourse` function logs appear when:
+- **Page reload/initial load**: Logs appear TWICE in development mode (Angular runs change detection twice to catch issues)
+- User clicks or focuses on ANY input field (triggers change detection)
+- User blurs/unfocuses from an input field
+- Any DOM event that triggers change detection (button clicks, etc.)
+- List modifications (add, remove, update items)
+- Calling methods like `loadCourses()` that replace the array
+
+**Important Notes:**
+- The trackBy function is called for ALL items in the list during change detection, not just changed items. This is why you see logs for all courses (indices 0, 1, 2) even when just focusing on an unrelated input box.
+- **Why twice on page reload?** In development mode, Angular intentionally runs change detection twice to help developers catch issues with expressions that have side effects or produce different values on subsequent evaluations. This won't happen in production mode(when you build with `ng build --prod` or `enableProdMode()`).
+
+**Example Console Output on Page Reload:**
+```
+trackCourse 0 {id: 1, name: 'course1'}
+trackCourse 1 {id: 2, name: 'course2'}
+trackCourse 2 {id: 3, name: 'course3'}
+// Then again (second change detection run):
+trackCourse 0 {id: 1, name: 'course1'}
+trackCourse 1 {id: 2, name: 'course2'}
+trackCourse 2 {id: 3, name: 'course3'}
+```
+
+#### Example Usage in Template
+```html
+src/app/app.component.html:
+<ul>
+  <li *ngFor="let course of courses; index as i; trackBy: trackCourse">
+    index:{{i}}, id:{{course.id}}, name:{{course.name}}
+  </li>
+</ul>
+```
+
+#### Performance Benefits
+- Without trackBy: Angular re-renders ALL DOM elements when the array reference changes
+- With trackBy: Angular only updates items with changed IDs, keeping unchanged DOM elements intact
+- Critical for large lists with frequent updates
 
 ## 🔗 Additional Resources
 

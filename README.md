@@ -151,7 +151,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Custom Directive Usage
 ```html
-src/app/app.component.html:
+<!-- src/app/app.component.html: -->
 <!-- Input format directive -->
 <input type="text" [appInputFormat]="'uppercase'">
 <input type="text" [appInputFormat]="'lowercase'">
@@ -159,7 +159,7 @@ src/app/app.component.html:
 
 ### Component with Content Projection
 ```html
-src/app/app.component.html:
+<!-- src/app/app.component.html: -->
 <!-- Zippy component usage -->
 <zippy [title]="'Shipping Details'">
   <p>Your shipping information goes here...</p>
@@ -172,7 +172,7 @@ src/app/app.component.html:
 
 ### Structural Directives
 ```html
-src/app/app.component.html:
+<!-- src/app/app.component.html: -->
 <!-- Conditional rendering -->
 <div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
 <ng-template #coursesList>
@@ -196,7 +196,7 @@ src/app/app.component.html:
 
 ### Dynamic Styling
 ```html
-src/app/app.component.html:
+<!-- src/app/app.component.html: -->
 <!-- Dynamic classes and styles -->
 <button [ngStyle]="{
     'backgroundColor': canSave ? 'blue' : 'gray',
@@ -291,7 +291,7 @@ ng g class model/user          # Generate class
 
 #### Implementation Example
 ```typescript
-src/app/input-format.directive.ts:
+// src/app/input-format.directive.ts:
 @HostListener('focus') onFocus() {
   console.log("on Focus");
 }
@@ -398,7 +398,7 @@ When DOM events occur (like focus, blur, click, input), Angular's change detecti
 
 #### TrackBy Function Purpose
 ```typescript
-src/app/app.component.ts:
+// src/app/app.component.ts:
 trackCourse(index: number, course: any) {
   console.log("trackCourse", index, course);
   return course ? course.id : undefined;
@@ -437,7 +437,7 @@ trackCourse 2 {id: 3, name: 'course3'}
 
 #### Example Usage in Template
 ```html
-src/app/app.component.html:
+<!-- src/app/app.component.html: -->
 <ul>
   <li *ngFor="let course of courses; index as i; trackBy: trackCourse">
     index:{{i}}, id:{{course.id}}, name:{{course.name}}

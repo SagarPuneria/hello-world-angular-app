@@ -374,6 +374,7 @@ npm audit fix                           # Auto-fix issues
 
 ### Built-in Pipe Parameters
 ```typescript
+// src/app/courses9.component.ts:
 // Number Pipe: {{ value | number:'minIntegerDigits.minFractionDigits-maxFractionDigits' }}
 {{ 1234.5678 | number:'1.2-2' }}  // Output: 1,234.57
 
@@ -443,12 +444,14 @@ npm install -g @angular/cli@8.1.0
 
 **Issue**: Bootstrap styles not loading
 ```bash
+# src/styles.css:
 # Verify styles.css imports
 @import "~bootstrap/dist/css/bootstrap.css";
 ```
 
 **Issue**: Font Awesome icons not displaying
 ```bash
+# src/styles.css:
 # Check Font Awesome import in styles.css
 @import "~font-awesome/css/font-awesome.css";
 ```
@@ -540,21 +543,22 @@ export class ExampleComponent { }
 
 **Solution**: Use `$event.stopPropagation()` to prevent event bubbling
 ```typescript
+// src/app/courses5.component.ts:
 @Component({
   template: `
     <div (click)="onDivClicked()">
-      <button (click)="onButtonClicked($event)">Click Me</button>
+      <button (click)="onSave($event)">Click Me</button>
     </div>
   `
 })
 export class ExampleComponent {
-  onButtonClicked($event: Event) {
-    $event.stopPropagation();  // Prevents onDivClicked from firing
-    console.log('Button clicked');
+  onSave($event: Event) {
+    $event.stopPropagation();  // Prevents onDivClicked from firing(Stop Event Bubbling)
+    console.log("Save button was clicked", $event); // Event Binding
   }
   
   onDivClicked() {
-    console.log('Div clicked');
+    console.log("Div was clicked"); // Event Bubbling
   }
 }
 ```

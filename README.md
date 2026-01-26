@@ -298,7 +298,7 @@ ng lint
 
 ### Manual vs CLI Component Comparison
 
-**Manual Component (`courses.component.ts`)**:
+**Manual Component (`src/app/courses.component.ts`)**:
 ```typescript
 @Component({
     selector: 'courses',
@@ -317,7 +317,7 @@ export class CoursesComponent {
 }
 ```
 
-**CLI Generated Component (`course.component.ts`)**:
+**CLI Generated Component (`src/app/course/course.component.ts`)**:
 ```typescript
 @Component({
   selector: 'app-course',
@@ -338,14 +338,14 @@ export class CourseComponent implements OnInit {
 
 **Traditional Service Registration (Manual)**:
 ```typescript
-// courses.service.ts - Manual registration
+// src/app/courses.service.ts - Manual registration
 export class CoursesService {
     getCourses() {
         return ["course service 1", "course service 2", "course service 3"];
     }
 }
 
-// log.service.ts - Manual registration
+// src/app/log.service.ts - Manual registration
 export class LogService {
     services: string[];
     logService(v: string[]) {
@@ -360,7 +360,7 @@ providers: [CoursesService, LogService] // Manual registration required
 
 **Modern Service Registration (CLI Generated)**:
 ```typescript
-// authors.service.ts - Auto registration with dependency injection in action.
+// src/app/authors.service.ts - Auto registration with dependency injection in action.
 // Created using Angular CLI command: $ ng g s authors
 // No need to register this dependency(AuthorsService) in main app module
 @Injectable({
@@ -377,7 +377,7 @@ export class AuthorsService {
     // No manual registration needed
 }
 
-// email.service.ts - Auto registration with dependency injection in action.
+// src/app/email.service.ts - Auto registration with dependency injection in action.
 // Created using Angular CLI command: $ ng g s email
 // No need to register this dependency(EmailService) in main app module
 @Injectable({
@@ -395,7 +395,7 @@ export class EmailService {
 
 ### Template Directives & Data Binding Examples
 
-**Structural Directives (`app.component.html`)**:
+**Structural Directives (`src/app/app.component.html`)**:
 ```html
 <!-- *ngIf with template references -->
 <div *ngIf="coursesList.length > 0; then courseList else noCourses"></div>
@@ -422,7 +422,7 @@ export class EmailService {
 
 **Component Template Patterns**:
 ```html
-<!-- authors.component.html - Object iteration -->
+<!-- src/app/authors/authors.component.html - Object iteration -->
 <h2>{{authors.length}} Authors</h2>
 <ul>
     <li *ngFor="let author of authors">
@@ -430,7 +430,7 @@ export class EmailService {
     </li>
 </ul>
 
-<!-- course.component.html - Service data display -->
+<!-- src/app/course/course.component.html - Service data display -->
 <h2>{{title}}</h2>
 <ul>
     <li *ngFor="let email of emails">{{email}}</li>

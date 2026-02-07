@@ -66,9 +66,9 @@ export class PostsComponent implements OnInit {
           // console.log(response['id']);
           console.log(this.posts);
         },
-        //(error: Response) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        //(error: Response) => { // In arrow function whenever you use type annotation, you need to put parentheses around parameters (error: Response).
         //if (error.status === 400) {
-        (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parentheses around parameters (error: Response).
           this.posts.splice(0, 1);
 
           if (error instanceof BadInput) {
@@ -108,9 +108,9 @@ export class PostsComponent implements OnInit {
       // this.service.deletePost(101)
       .subscribe(
         null, // () => {}, // instead of passing empty arrow function, pass null
-        //(error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        //(error: HttpErrorResponse) => { // In arrow function whenever you use type annotation, you need to put parentheses around parameters (error: Response).
         //if (error.status === 404)
-        (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parameters in paranthesis (error: Response).
+        (error: AppError) => { // In arrow function whenever you use type annotation, you need to put parentheses around parameters (error: Response).
           this.posts.splice(index, 0, post);
 
           if (error instanceof NotFoundError)

@@ -315,6 +315,13 @@ export class CoursesComponent {
     courses = ["course1", "course2", "course3"];
     // Manual registration required in app.module.ts
 }
+
+// app.module.ts
+@NgModule({
+  declarations: [
+    CoursesComponent // Manually registered
+  ]
+})
 ```
 
 **CLI Generated Component (`src/app/course/course.component.ts`)**:
@@ -332,6 +339,13 @@ export class CourseComponent implements OnInit {
     }
     // Automatically registered in app.module.ts
 }
+
+// app.module.ts
+@NgModule({
+  declarations: [
+    CoursesComponent // Automatically registered
+  ]
+})
 ```
 
 ### Service Dependency Injection Patterns
@@ -355,7 +369,9 @@ export class LogService {
 }
 
 // app.module.ts
-providers: [CoursesService, LogService] // Manual registration required
+@NgModule({
+  providers: [CoursesService, LogService] // Manual registration required
+})
 ```
 
 **Modern Service Registration (CLI Generated)**:

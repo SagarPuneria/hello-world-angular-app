@@ -18,6 +18,8 @@ export class DataService {
     getAll() {
         return this.http.get(this.url)
             .pipe(map(response => response), catchError(this.handleError));
+            // .pipe(map((response) => response), catchError(this.handleError));
+            // .pipe(map((response) => {return response}), catchError(this.handleError));
 
     }
 

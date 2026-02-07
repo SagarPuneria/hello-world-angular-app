@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { GithubFollowersService } from '../github-followers.service';
 
 @Component({
@@ -7,27 +7,13 @@ import { GithubFollowersService } from '../github-followers.service';
   templateUrl: './github-followers.component.html',
   styleUrls: ['./github-followers.component.css']
 })
-export class GithubFollowersComponent implements OnInit, OnDestroy {
-  followers: any[] = [];
-  private subscription: Subscription;
+export class GithubFollowersComponent implements OnInit {
+  followers$: Observable<any>;
 
   constructor(private service: GithubFollowersService) { }
 
   ngOnInit() {
-    this.subscription = this.service.getAll()
-      .subscribe(
-        (followers: any) => this.followers = followers,
-        error => {
-          console.error('Error fetching followers:', error);
-          alert('Could not fetch followers from the server.');
-        }
-      );
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.followers$ = this.service.getAll();
   }
 
 }

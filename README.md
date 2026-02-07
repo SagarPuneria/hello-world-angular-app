@@ -231,14 +231,131 @@ export class AppModule { }
     {{post.title}}
 </li>
 
+<!-- *ngFor with Async Pipe: Automatic Observable subscription -->
+<div *ngFor="let follower of followers$ | async" class="media">
+    {{follower.login}}
+</div>
+
 <!-- Event binding with template reference variable -->
 <input (keyup.enter)="createPost(title)" #title type="text">
 
 <!-- Property binding -->
 <img src="{{ follower.avatar_url}}">
+<!-- Or using property binding syntax -->
+<img [src]="follower.avatar_url">
 
 <!-- Two-way data binding (requires FormsModule) -->
 <input [(ngModel)]="searchText" type="text">
+
+<!-- Async pipe with multiple usages (shares single subscription) -->
+<div *ngIf="followers$ | async as followers">
+    <p>Total followers: {{followers.length}}</p>
+    <div *ngFor="let follower of followers">
+        {{follower.login}}
+    </div>
+</div>
+```
+
+**Async Pipe Best Practices:**
+1. **Naming Convention**: Use `$` suffix for Observable properties (e.g., `followers$`, `users$`, `data$`)
+2. **Share Subscriptions**: Use `*ngIf` with `as` to avoid multiple subscriptions
+3. **Combine with Other Pipes**: Chain pipes like `followers$ | async | slice:0:10`
+4. **Error Handling**: Use RxJS operators like `catchError` before the template
+5. **Loading States**: Combine with `*ngIf` to show loading indicators
+
+---
+
+## Use Case: Async Pipe Explanation
+
+### What happens:
+- `|` - Pipe operator applies the `async` transformation
+- `async` - Subscribes to the `templateColumns$` Observable
+- `as columnsTable` - Stores the emitted value in a template variable
+- Template uses `columnsTable` as a regular array
+
+### Key Benefits
+
+#### ✅ 1. Automatic Memory Management
+
+```typescript
+// ❌ Manual subscription (BAD - requires cleanup)
+ngOnInit() {
+  this.subscription = this.templateColumns$.subscribe(columns => {
+    this.columns = columns;
+  });
+}
+ngOnDestroy() {
+  this.subscription.unsubscribe(); // Easy to forget!
+}
+
+// ✅ Async pipe (GOOD - automatic cleanup)
+// Template: {{templateColumns$ | async}} as columns
+```
+
+#### ✅ 2. OnPush Change Detection Compatible
+
+The `async` pipe automatically triggers change detection when new values arrive, perfect for `ChangeDetectionStrategy.OnPush` components.
+
+```typescript
+@Component({
+  selector: 'app-data-table',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <div *ngIf="templateColumns$ | async as columnsTable">
+      <p-table [columns]="columnsTable" ...></p-table>
+    </div>
+  `
+})
+```
+
+#### ✅ 3. Conditional Rendering Gate
+
+```html
+<div *ngIf="{{templateColumns$ | async}} as columnsTable">
+    <!-- This block only renders when Observable emits a truthy value -->
+    <p-table [columns]="columnsTable" ...></p-table>
+</div>
+```
+
+The table won't render until columns are loaded from the API.
+
+#### ✅ 4. Eliminates Null/Undefined Checks
+
+```html
+<!-- ❌ Without async - need explicit null checks -->
+<p-table *ngIf="columns" [columns]="columns" ...></p-table>
+
+<!-- ✅ With async - null-safe automatically -->
+<div *ngIf="templateColumns$ | async as columnsTable">
+    <p-table [columns]="columnsTable" ...></p-table>
+</div>
+```
+
+### Complete Example
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'app-data-table',
+  template: `
+    <div *ngIf="templateColumns$ | async as columnsTable">
+        <!-- This block only renders when Observable emits a truthy value -->
+        <p-table [columns]="columnsTable" ...></p-table>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DataTableComponent implements OnInit {
+  templateColumns$: Observable<any>;
+
+  ngOnInit() {
+    // Simply assign the Observable
+    this.templateColumns$ = this.service.getColumns();
+  }
+  // No ngOnDestroy needed!
+}
 ```
 
 ## Installation
@@ -412,6 +529,7 @@ This project demonstrates:
 - **Service-Based Architecture**: Dependency injection and service providers
 - **Error Handling Strategies**: Global error handling and custom error types
 - **Reactive Programming with RxJS**: Observables, operators, and subscriptions
+- **Async Pipe Pattern**: Automatic subscription management in templates
 - **Component Communication**: Input/Output properties and services
 - **Form Handling and Validation**: Template-driven forms with Angular Forms
 - **Bootstrap Integration**: Responsive UI with CSS framework
@@ -436,6 +554,21 @@ export class PostsComponent implements OnInit {
         this.posts = posts;
       });
   }
+}
+```
+
+**Example: Using Async Pipe for Better Performance**
+```typescript
+export class GithubFollowersComponent implements OnInit {
+  followers$: Observable<any>; // Observable property with $ suffix
+
+  constructor(private service: GithubFollowersService) { }
+
+  ngOnInit() {
+    // Assign Observable directly - let async pipe handle subscription
+    this.followers$ = this.service.getAll();
+  }
+  // No ngOnDestroy needed - async pipe handles cleanup automatically!
 }
 ```
 
@@ -728,6 +861,7 @@ deletePost(post) {
 - Operators: `map`, `catchError`, `throwError`
 - Subscription management and cleanup
 - Error propagation in observable chains
+- **Async Pipe**: Automatic subscription management in templates
 
 **Example: RxJS Operators in Action**
 ```typescript
@@ -756,6 +890,84 @@ private handleError(error: Response) {
     if (error.status === 404)
         return throwError(new NotFoundError);
     return throwError(new AppError(error.json()));
+}
+```
+
+**Example: Async Pipe Pattern (Recommended)**
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { GithubFollowersService } from '../github-followers.service';
+
+@Component({
+  selector: 'github-followers',
+  templateUrl: './github-followers.component.html',
+  styleUrls: ['./github-followers.component.css']
+})
+export class GithubFollowersComponent implements OnInit {
+  // Use $ suffix to indicate Observable (naming convention)
+  followers$: Observable<any>;
+
+  constructor(private service: GithubFollowersService) { }
+
+  ngOnInit() {
+    // Simply assign the Observable, don't subscribe
+    this.followers$ = this.service.getAll();
+  }
+  // No need for ngOnDestroy - async pipe handles cleanup!
+}
+```
+
+**Template using Async Pipe:**
+```html
+<div *ngFor="let follower of followers$ | async" class="media">
+    <div class="media-left">
+        <img src="{{ follower.avatar_url}}">
+    </div>
+    <div class="media-body">
+        <h4>{{follower.login}}</h4>
+    </div>
+</div>
+```
+
+**Benefits of Async Pipe:**
+- ✅ Automatic subscription management
+- ✅ Automatic unsubscription (prevents memory leaks)
+- ✅ No need for `OnDestroy` lifecycle hook
+- ✅ Cleaner, more declarative code
+- ✅ Better change detection performance
+- ✅ Handles errors gracefully in the template
+
+**Example: Manual Subscription vs Async Pipe**
+```typescript
+// ❌ Manual Subscription (More Code, Manual Cleanup Required)
+export class ComponentManual implements OnInit, OnDestroy {
+  followers: any[] = [];
+  private subscription: Subscription;
+
+  ngOnInit() {
+    this.subscription = this.service.getAll()
+      .subscribe(
+        (followers: any) => this.followers = followers,
+        error => console.error(error)
+      );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe(); // Must manually cleanup
+    }
+  }
+}
+
+// ✅ Async Pipe (Less Code, Automatic Cleanup)
+export class ComponentAsync implements OnInit {
+  followers$: Observable<any>;
+
+  ngOnInit() {
+    this.followers$ = this.service.getAll();
+    // Angular handles subscription/unsubscription automatically!
+  }
 }
 ```
 

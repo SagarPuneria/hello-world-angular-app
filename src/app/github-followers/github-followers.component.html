@@ -1,6 +1,6 @@
 <p>github-followers works!</p>
 
-<div *ngFor="let follower of followers" class="media">
+<div *ngFor="let follower of followers$ | async" class="media">
     <div style="display:inline-block;" class="media-left">
         <a href="#">
             <img class="avatar media-object" src="{{ follower.avatar_url}}">

@@ -707,6 +707,263 @@ export class GithubFollowersService extends DataService {
 }
 ```
 
+---
+
+### Class Inheritance and URL Flow
+
+**Understanding Service Inheritance Pattern:**
+
+The project uses a **generic base service** pattern where child services extend a parent `DataService` class:
+
+```typescript
+// Parent Service - Generic CRUD operations
+export class DataService {
+  constructor(private url: string, private http: HttpClient) { }
+  
+  getAll() {
+    return this.http.get(this.url);  // Uses this.url
+  }
+  
+  create(resource) {
+    return this.http.post(this.url, JSON.stringify(resource));
+  }
+  // ... other CRUD methods
+}
+
+// Child Service - Provides specific URL
+export class GithubFollowersService extends DataService {
+  constructor(http: HttpClient) {
+    super('https://api.github.com/users/SagarPuneria/following', http);
+  }
+}
+```
+
+**URL Flow Diagram:**
+
+```
+GithubFollowersService Constructor
+         ↓
+    super() call with URL
+         ↓
+DataService Constructor receives URL
+         ↓
+  Stored as private url property
+         ↓
+   Used in all HTTP methods
+         ↓
+    this.http.get(this.url)
+```
+
+**Step-by-Step Flow:**
+
+1. **Child class constructor** receives `HttpClient`
+2. **`super()` is called** with URL string and `http` parameter
+3. **Parent constructor** stores URL as `this.url` (TypeScript shorthand)
+4. **All HTTP methods** use `this.url` for API calls
+5. **Each child service** can have different URLs but same CRUD logic
+
+#### Detailed Step-by-Step Flow:
+
+**1. GithubFollowersService (Child Class)**
+```typescript
+export class GithubFollowersService extends DataService {
+  constructor(http: HttpClient) {
+    // Calls parent class constructor with URL and http
+    super('https://api.github.com/users/SagarPuneria/following', http)
+    //     ↑ First parameter                                      ↑ Second parameter
+  }
+}
+```
+
+**2. super() Call - Invokes Parent Constructor**
+```typescript
+super('https://api.github.com/users/SagarPuneria/following', http)
+```
+- `super()` must be called before accessing `this` in child class
+- Passes URL string as first argument
+- Passes HttpClient instance as second argument
+
+**3. DataService (Parent Class) - Receives Parameters**
+```typescript
+export class DataService {
+  constructor(private url: string, private http: HttpClient) { }
+  //          ↑ Receives URL         ↑ Receives HttpClient
+}
+```
+- TypeScript shorthand creates `private url` property = `'https://api.github.com/users/SagarPuneria/following'`
+- TypeScript shorthand creates `private http` property = HttpClient instance
+
+**4. Used in HTTP Methods**
+```typescript
+getAll() {
+    return this.http.get(this.url)  // this.url = 'https://api.github.com/users/SagarPuneria/following'
+        .pipe(map(response => response), catchError(this.handleError));
+}
+```
+
+**Complete Flow Example:**
+```typescript
+// 1. Component creates or injects GithubFollowersService
+constructor(private service: GithubFollowersService) { }
+
+// 2. Component calls service method
+ngOnInit() {
+  this.followers$ = this.service.getAll();
+}
+
+// 3. getAll() is inherited from DataService
+getAll() {
+  return this.http.get(this.url);  
+  // this.url = 'https://api.github.com/users/SagarPuneria/following'
+}
+
+// 4. HTTP GET request is made to:
+// https://api.github.com/users/SagarPuneria/following
+```
+
+**Why This Pattern?**
+- ✅ **DRY Principle** - CRUD logic written once in `DataService`
+- ✅ **Flexibility** - Each service provides its own endpoint URL
+- ✅ **Reusability** - Same service methods work with different APIs
+- ✅ **Maintainability** - Update HTTP logic once, affects all services
+
+**Different Services, Different URLs:**
+```typescript
+// PostService uses JSONPlaceholder API
+export class PostService extends DataService {
+  constructor(http: HttpClient) {
+    super('http://jsonplaceholder.typicode.com/posts', http);
+  }
+}
+
+// GithubFollowersService uses GitHub API
+export class GithubFollowersService extends DataService {
+  constructor(http: HttpClient) {
+    super('https://api.github.com/users/SagarPuneria/following', http);
+  }
+}
+
+// Both inherit: getAll(), create(), update(), delete()
+// But each uses their own URL!
+```
+
+---
+
+### The `this` Keyword and `super()` Relationship
+
+**Critical Rule:** In TypeScript/JavaScript class inheritance, **`this` doesn't exist until `super()` completes**.
+
+**Why `super()` Must Be Called First:**
+
+```typescript
+export class GithubFollowersService extends DataService {
+  private apiVersion = 'v1'; // ✅ Property declaration is OK
+  
+  constructor(http: HttpClient) {
+    // ❌ ERROR: Cannot access 'this' before calling 'super()'
+    // console.log(this.apiVersion); 
+    
+    // ✅ super() MUST be called first
+    super('https://api.github.com/users/SagarPuneria/following', http);
+    
+    // ✅ NOW you can use 'this'
+    console.log(this.apiVersion); // Works!
+  }
+}
+```
+
+**Object Construction Order:**
+
+```
+Child Constructor Called
+         ↓
+    [this doesn't exist yet]
+         ↓
+    super() is called
+         ↓
+    Parent Constructor runs
+         ↓
+    Parent initializes properties (url, http)
+         ↓
+    [this is now created with parent properties]
+         ↓
+    Control returns to Child constructor
+         ↓
+    Child can now initialize its own properties
+         ↓
+    [this has both parent and child properties]
+         ↓
+    Constructor completes
+```
+
+**What `this` Contains After `super()`:**
+
+```typescript
+export class GithubFollowersService extends DataService {
+  constructor(http: HttpClient) {
+    super('https://api.github.com/users/SagarPuneria/following', http);
+    
+    // After super(), 'this' refers to the complete instance:
+    // this = {
+    //   url: 'https://api.github.com/users/SagarPuneria/following',
+    //   http: HttpClient instance,
+    //   getAll: function() { ... },    // Inherited
+    //   create: function() { ... },     // Inherited
+    //   update: function() { ... },     // Inherited
+    //   delete: function() { ... },     // Inherited
+    //   handleError: function() { ... } // Inherited
+    // }
+  }
+}
+```
+
+**Real-World Example from the Project:**
+
+```typescript
+// DataService (Parent)
+export class DataService {
+  constructor(private url: string, private http: HttpClient) {
+    // Parent sets up 'this.url' and 'this.http'
+  }
+  
+  getAll() {
+    return this.http.get(this.url); // Uses this.url
+  }
+}
+
+// GithubFollowersService (Child)
+export class GithubFollowersService extends DataService {
+  constructor(http: HttpClient) {
+    // Before super(): this.url doesn't exist ❌
+    // Before super(): this.http doesn't exist ❌
+    
+    super('https://api.github.com/users/SagarPuneria/following', http);
+    
+    // After super(): this.url exists ✅
+    // After super(): this.http exists ✅
+    // After super(): this.getAll() exists ✅
+  }
+}
+
+// Component using the service
+export class GithubFollowersComponent {
+  ngOnInit() {
+    this.followers$ = this.service.getAll();
+    // Calls inherited getAll() which uses this.url from parent
+  }
+}
+```
+
+**Key Takeaways:**
+
+1. **`super()` creates the object** - Before `super()`, there is no `this`
+2. **`super()` initializes parent properties** - Parent constructor runs first
+3. **`this` becomes available after `super()`** - Then child can add/use properties
+4. **`this` refers to the complete instance** - Includes both parent and child properties
+5. **This ensures proper inheritance** - Parent always initializes before child
+
+This is a **safety mechanism** ensuring objects are constructed in the correct order and all inherited properties are properly initialized before the child class attempts to use them.
+
 #### HTTP Operations
 - GET requests for data retrieval
 - POST requests for creating resources

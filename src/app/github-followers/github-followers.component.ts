@@ -10,7 +10,14 @@ import { GithubFollowersService } from '../github-followers.service';
 export class GithubFollowersComponent implements OnInit {
   followers$: Observable<any>;
 
+  // With TypeScript shorthand 
   constructor(private service: GithubFollowersService) { }
+
+  /* // Without TypeScript shorthand (more verbose):
+  private service: GithubFollowersService;
+  constructor(service: GithubFollowersService) {
+    this.service = service;
+  } */
 
   ngOnInit() {
     this.followers$ = this.service.getAll();

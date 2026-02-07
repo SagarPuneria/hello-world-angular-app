@@ -579,6 +579,54 @@ export class GithubFollowersComponent implements OnInit {
 - Providing services at module level
 - Service singleton pattern
 - Generic service classes for code reuse
+- **TypeScript Constructor Shorthand** for dependency injection
+
+**Example: TypeScript Constructor Shorthand**
+
+Angular leverages TypeScript's parameter properties feature for cleaner dependency injection:
+
+```typescript
+// ✅ WITH TypeScript Shorthand (Recommended)
+export class GithubFollowersComponent {
+  constructor(private service: GithubFollowersService) { }
+  // TypeScript automatically creates the property and assigns it!
+}
+
+// ❌ WITHOUT TypeScript Shorthand (Verbose)
+export class GithubFollowersComponent {
+  private service: GithubFollowersService;
+  
+  constructor(service: GithubFollowersService) {
+    this.service = service;
+  }
+}
+```
+
+**How it works:**
+1. `private service: GithubFollowersService` in constructor parameter
+2. TypeScript automatically creates `private service` property
+3. TypeScript automatically assigns the parameter to the property
+4. You can immediately use `this.service` in your component
+
+**Access Modifiers:**
+- `private` - Only accessible within the class (use when service is not needed in template)
+- `public` - Accessible everywhere including template (default if omitted)
+- `protected` - Accessible in the class and subclasses
+- `readonly` - Cannot be reassigned after initialization
+
+**Dependency Injection Flow:**
+1. **Angular sees** `GithubFollowersService` in constructor parameter
+2. **Angular looks** for a provider (registered via `@Injectable({ providedIn: 'root' })`)
+3. **Angular creates/retrieves** the service instance (singleton)
+4. **Angular injects** it into your component
+5. **You access** it via `this.service` throughout the component
+
+**Benefits:**
+- ✅ **Less boilerplate code** - 1 line instead of 4
+- ✅ **Cleaner syntax** - Property declaration and assignment in one place
+- ✅ **Loose coupling** - Component doesn't instantiate the service
+- ✅ **Testability** - Easy to mock services in unit tests
+- ✅ **Maintainability** - Service changes don't affect component code
 
 **Example: Generic Data Service**
 ```typescript
